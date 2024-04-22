@@ -1,10 +1,11 @@
 import React from 'react'
 import { LayoutCommon } from '../../layouts/styled'
 import Button from '../../components/Button'
+import { HomePageWrapper } from './styled'
 
 function HomePage() {
   return (
-    <div>
+    <HomePageWrapper>
       <div className="h-[70px] bg-white leading-[70px]">
         <LayoutCommon>
           <div className="flex items-center justify-between">
@@ -36,7 +37,8 @@ function HomePage() {
         className="h-[869px] w-full"
         alt=""
       />
-    </div>
+      <div className="abc"></div>
+    </HomePageWrapper>
   )
 }
 
