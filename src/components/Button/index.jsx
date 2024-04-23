@@ -1,6 +1,6 @@
 import React from 'react'
 import { ButtonStyled } from './styled'
-import { PropTypes } from 'prop-types'
+import PropTypes from 'prop-types'
 
 const Button = React.memo((props) => {
   const { onClick, children } = props
@@ -16,7 +16,6 @@ Button.propTypes = {
     PropTypes.func,
     PropTypes.oneOf([null, undefined]),
   ]),
-  children: Object,
 }
 
 Button.defaultProps = {

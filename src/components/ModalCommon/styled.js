@@ -7,7 +7,6 @@ export const ModalWrapper = styled(Modal)`
   }
 
   .ant-modal-title {
-    color: white;
   }
 
   .ant-form-item-label > label {
@@ -18,7 +17,6 @@ export const ModalWrapper = styled(Modal)`
     font-size: 16px;
     font-style: normal;
     font-weight: 700;
-    background-color: #ff5400;
     padding: 16px 24px;
     margin: 0;
   }

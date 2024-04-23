@@ -2,5 +2,4 @@
 @tailwind base;
 @tailwind components;
 
-@import './customantd.scss';
 @import './reset.scss';

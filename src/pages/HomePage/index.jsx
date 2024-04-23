@@ -1,9 +1,13 @@
 import React from 'react'
-import { LayoutCommon } from '../../layouts/styled'
+import { useNavigate } from 'react-router-dom'
+import { ReactComponent as Logo } from '../../assets/images/boom_arena.svg'
 import Button from '../../components/Button'
+import { LayoutCommon } from '../../layouts/styled'
+import { ROUTE_PATH } from '../../routes/route.constant'
 import { HomePageWrapper } from './styled'
 
 function HomePage() {
+  const naigate = useNavigate()
   return (
     <HomePageWrapper>
       <div className="h-[70px] bg-white leading-[70px]">
@@ -25,19 +29,33 @@ function HomePage() {
                 <div>Marketplace</div>
               </div>
               <div className="flex items-center gap-[25px]">
-                <Button>Sign Up</Button>
-                <Button>Login</Button>
+                <Button onClick={() => naigate(ROUTE_PATH.SIGN_UP)}>
+                  Sign Up
+                </Button>
+                <Button onClick={() => naigate(ROUTE_PATH.LOGIN)}>Login</Button>
               </div>
             </div>
           </div>
         </LayoutCommon>
       </div>
-      <img
-        src={process.env.PUBLIC_URL + '/image/bg_homepage.png'}
-        className="h-[869px] w-full"
-        alt=""
-      />
-      <div className="abc"></div>
+
+      <div className="background-header">
+        <LayoutCommon className="flex flex-col items-start justify-center">
+          <Logo className="h-[234px] w-[307px]" />
+          <div className="my-10 w-[432px] text-justify text-base font-bold text-white">
+            BOOM ARENA is an engaging play-and-earn game that offers a thrilling
+            real-time PvP battle experience. Its core principles are fairness,
+            fun, and freedom. Designed to attract Clash Royale fans, the game
+            blends the excitement of intense battles with the financial benefits
+            of blockchain technology.
+          </div>
+          <img src="./image/download_now.png" alt="" />
+          <div className="flex">
+            <img src="./image/chplay.png" alt="" className="cursor-pointer" />
+            <img src="./image/appstore.png" alt="" className="cursor-pointer" />
+          </div>
+        </LayoutCommon>
+      </div>
     </HomePageWrapper>
   )
 }

@@ -1,5 +1,6 @@
 export const ROUTE_PATH = {
   HOME: '/',
-
-  DASHBOARD: '/dashboard',
+  LOGIN: '/login',
+  SIGN_UP: '/sign-up',
+  FORGOT_PASS: '/forgot-password',
 }

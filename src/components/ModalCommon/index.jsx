@@ -1,4 +1,4 @@
-import { PropTypes } from 'prop-types'
+import PropTypes from 'prop-types'
 import React from 'react'
 import { ModalWrapper } from './styled'
 
@@ -7,12 +7,12 @@ const ModalCommon = (props) => {
   return (
     <ModalWrapper
       {...props}
-      title={title || 'Modal Title'}
+      title={title ?? 'thêm'}
       open={open}
-      width={width ?? '600px'}
+      width={width ?? '480px'}
       onCancel={onCancel}
       onOk={onOk}
-      style={{ top: '20px' }}
+      // style={{ top: '20px' }}
       footer={<div>{footer}</div> || null}
     >
       {children}
@@ -39,5 +39,4 @@ ModalCommon.defaultProps = {
   onCancel: null,
   onOk: null,
 }
-
 export default ModalCommon

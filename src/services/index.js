@@ -59,11 +59,11 @@ http.interceptors.request.use(
 http.interceptors.response.use(
   (response) => {
     // Xử lý và định dạng dữ liệu nhận được từ API ở đây
-    return response.data
-    // return {
-    //   ...response.data,
-    //   isOk: true,
-    // }
+
+    return {
+      ...response.data,
+      isOk: true,
+    }
   },
   async (error) => {
     if (error.response && error.response.status === 401) {
