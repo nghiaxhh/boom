@@ -9,6 +9,8 @@ import Login from '../pages/Authentication/Login'
 import SignUp from '../pages/Authentication/SignUp'
 
 const HomePage = React.lazy(() => import('../pages/HomePage'))
+const RootPage = React.lazy(() => import('../pages/RootPage'))
+const Profile = React.lazy(() => import('../pages/Profile'))
 const ForgotPass = React.lazy(
   () => import('../pages/Authentication/ForgotPass')
 )
@@ -23,10 +25,10 @@ export const router = createBrowserRouter([
         element: <AuthLayout />,
         children: [
           {
-            path: ROUTE_PATH.HOME,
+            path: '/',
             element: (
               <Suspense fallback={null}>
-                <HomePage />
+                <RootPage />
               </Suspense>
             ),
           },
@@ -63,7 +65,15 @@ export const router = createBrowserRouter([
             path: ROUTE_PATH.HOME,
             element: (
               <Suspense fallback={null}>
-                <div>home</div>
+                <HomePage />
+              </Suspense>
+            ),
+          },
+          {
+            path: ROUTE_PATH.PROFILE,
+            element: (
+              <Suspense fallback={null}>
+                <Profile />
               </Suspense>
             ),
           },

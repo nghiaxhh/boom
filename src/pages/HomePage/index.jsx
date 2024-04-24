@@ -1,44 +1,11 @@
 import React from 'react'
-import { useNavigate } from 'react-router-dom'
 import { ReactComponent as Logo } from '../../assets/images/boom_arena.svg'
-import Button from '../../components/Button'
 import { LayoutCommon } from '../../layouts/styled'
-import { ROUTE_PATH } from '../../routes/route.constant'
 import { HomePageWrapper } from './styled'
 
 function HomePage() {
-  const naigate = useNavigate()
   return (
     <HomePageWrapper>
-      <div className="h-[70px] bg-white leading-[70px]">
-        <LayoutCommon>
-          <div className="flex items-center justify-between">
-            <div className="flex items-center gap-3">
-              <img
-                src={process.env.PUBLIC_URL + '/image/header_logo.png'}
-                alt=""
-              />
-              <div className="font-['Bebas_Neue'] text-[32px] uppercase text-[#FF9C09] ">
-                boom arena
-              </div>
-            </div>
-            <div className="flex items-center gap-[60px]">
-              <div className="flex items-center gap-6">
-                <div>Game</div>
-                <div>Point System</div>
-                <div>Marketplace</div>
-              </div>
-              <div className="flex items-center gap-[25px]">
-                <Button onClick={() => naigate(ROUTE_PATH.SIGN_UP)}>
-                  Sign Up
-                </Button>
-                <Button onClick={() => naigate(ROUTE_PATH.LOGIN)}>Login</Button>
-              </div>
-            </div>
-          </div>
-        </LayoutCommon>
-      </div>
-
       <div className="background-header">
         <LayoutCommon className="flex flex-col items-start justify-center">
           <Logo className="h-[234px] w-[307px]" />

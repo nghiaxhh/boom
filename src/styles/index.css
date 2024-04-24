@@ -1,5 +1,5 @@
+@import './reset.scss';
+
 @tailwind utilities;
 @tailwind base;
 @tailwind components;
-
-@import './reset.scss';

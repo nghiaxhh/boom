@@ -1,35 +1,26 @@
-/* eslint-disable no-unused-vars */
-import React, { useEffect, useState } from 'react'
-import { Layout, Spin, theme } from 'antd'
-
-import { useDispatch } from 'react-redux'
-import { Outlet, useLocation } from 'react-router-dom'
-import { ROUTE_PATH } from '../../routes/route.constant'
+import { Layout } from 'antd'
+import React, { useEffect } from 'react'
+import { Outlet, useNavigate } from 'react-router-dom'
+import { TOKEN_KEY } from '../../helper/constants'
+import Navbar from './Navbar'
 
 const { Content } = Layout
 
 function MainLayout() {
-  const {
-    token: { colorBgContainer },
-  } = theme.useToken()
-  const dispatch = useDispatch()
-  const location = useLocation()
+  const navigate = useNavigate()
+  const isLogin = localStorage.getItem(TOKEN_KEY)
 
-  const [loading, setLoading] = useState(false)
-
-  useEffect(() => {}, [])
+  // useEffect(() => {
+  //   console.log(isLogin)
+  //   if (!isLogin) return navigate('/')
+  // }, [])
 
   return (
     <Layout>
-      <Content style={{ padding: '20px' }}>
-        <div
-          className={`h-full rounded-xl p-5 ${
-            location.pathname === ROUTE_PATH.EMPLOYEE_DETAIL ? '' : 'bg-white'
-          }`}
-        >
-          <Spin spinning={loading}>
-            <Outlet />
-          </Spin>
+      <Navbar />
+      <Content>
+        <div className="bg-white pt-6">
+          <Outlet />
         </div>
       </Content>
     </Layout>
