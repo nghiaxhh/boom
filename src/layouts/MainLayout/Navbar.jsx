@@ -32,6 +32,12 @@ function Navbar() {
               </div>
               <div className="cursor-pointer">Marketplace</div>
             </div>
+            <div className="flex items-center gap-2">
+              <div>
+                <img src="./image/circle_star.png" alt="" />
+              </div>
+              100 Points
+            </div>
             <div
               className="flex items-center gap-[25px]"
               onClick={() => navigate(ROUTE_PATH.USER_INFO)}

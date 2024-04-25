@@ -7,9 +7,13 @@ export const UserInfoWrapper = styled.div`
     align-items: center;
   }
 
+  .ant-upload {
+    width: 100%;
+  }
+
   .abc {
     cursor: pointer;
-    width: 890px;
+    width: 100%;
     height: 200px;
     background: url('./image/upload_cover_image.png');
     background-repeat: no-repeat;
