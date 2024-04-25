@@ -12,8 +12,7 @@
 /build
 
 # misc
-.DS_Store
-.env.local
+.DS_Store 
  
 
 npm-debug.log*

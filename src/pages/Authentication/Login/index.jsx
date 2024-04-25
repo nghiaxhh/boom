@@ -8,7 +8,7 @@ const Login = () => {
     <LayoutCommon>
       <AuthenticationWrapper>
         <div className="flex w-3/5 max-w-[740px] items-center">
-          <img src={'./image/boom_login.png'} alt="" />
+          <img src={'./image/boom_login.png'} alt="" width={600} />
         </div>
         <div className="flex w-2/5 items-center">
           <LoginForm />
