@@ -1,7 +1,7 @@
 import React from 'react'
 import { LayoutCommon } from '../../../layouts/styled'
-import SignUpForm from './components/SignUpForm'
 import { SignUpWrapper } from './styled'
+import SignUpForm from './SignUpForm'
 
 const SignUp = () => {
   return (

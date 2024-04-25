@@ -1,14 +1,41 @@
-import { Checkbox, Col, Form, Input, Row } from 'antd'
+import { Checkbox, Col, Form, Input, Row, Spin } from 'antd'
 import React, { useState } from 'react'
 import { useNavigate } from 'react-router-dom'
-import Button from '../../../../components/Button'
-import { SignUpFormWrapper } from '../styled'
-import { ROUTE_PATH } from '../../../../routes/route.constant'
+import Button from '../../../components/Button'
+import { SignUpFormWrapper } from './styled'
+import { ROUTE_PATH } from '../../../routes/route.constant'
+import AuthServices from './../../../services/AuthServices'
 
 const SignUpForm = () => {
   const [form] = Form.useForm()
   const navigate = useNavigate()
+  const isDisableButton = !Form.useWatch('termsServices', form)
   const [loading, setLoading] = useState(false)
+
+  const handleSubmitForm = () => {
+    form
+      .validateFields()
+      .then((values) => {
+        console.log(values)
+        const body = {
+          username: values.email,
+          password: values.password,
+          fullname: values.fullName,
+          referalID: values.referalID,
+        }
+        setLoading(true)
+        AuthServices.signUp(body)
+          .then((res) => {
+            if (res.isOk) {
+              console.log(res)
+              navigate(ROUTE_PATH.LOGIN)
+            }
+          })
+          .catch(() => {})
+          .finally(() => setLoading(false))
+      })
+      .catch(() => {})
+  }
 
   return (
     <SignUpFormWrapper>
@@ -19,12 +46,13 @@ const SignUpForm = () => {
       />
       <div className="mb-8 mt-6 text-[32px] font-bold">Create New Account</div>
 
-      <div>
+      <Spin spinning={loading}>
         <Form
           form={form}
           layout="vertical"
           requiredMark={false}
-          autoComplete={false}
+          autoComplete="off"
+          onValuesChange={(changeValue) => console.log(changeValue)}
         >
           <Row>
             <Col span={24}>
@@ -45,6 +73,20 @@ const SignUpForm = () => {
               <Form.Item
                 name={'email'}
                 label="Email address"
+                rules={[
+                  {
+                    required: true,
+                    message: 'Thông tin không được để trống',
+                  },
+                ]}
+              >
+                <Input />
+              </Form.Item>
+            </Col>
+            <Col span={24}>
+              <Form.Item
+                name={'referalID'}
+                label="Referral ID"
                 rules={[
                   {
                     required: true,
@@ -92,7 +134,7 @@ const SignUpForm = () => {
               </Form.Item>
             </Col>
             <Col span={24} className="mb-6 flex items-center gap-1">
-              <Form.Item name={'remember'} noStyle>
+              <Form.Item name={'termsServices'} valuePropName="checked" noStyle>
                 <Checkbox />
               </Form.Item>
               <div className="flex">
@@ -108,7 +150,11 @@ const SignUpForm = () => {
             </Col>
           </Row>
         </Form>
-        <Button loading={loading} className="mb-6 w-full">
+        <Button
+          disabled={!!isDisableButton}
+          className="mb-6 w-full"
+          onClick={handleSubmitForm}
+        >
           Sign Up
         </Button>
         <div className="flex justify-center">
@@ -120,7 +166,7 @@ const SignUpForm = () => {
             Login here
           </div>
         </div>
-      </div>
+      </Spin>
     </SignUpFormWrapper>
   )
 }

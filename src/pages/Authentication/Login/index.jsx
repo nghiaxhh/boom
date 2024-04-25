@@ -1,7 +1,7 @@
 import React from 'react'
-import LoginForm from './components/LoginForm'
 import { AuthenticationWrapper } from './styled'
 import { LayoutCommon } from '../../../layouts/styled'
+import LoginForm from './LoginForm'
 
 const Login = () => {
   return (

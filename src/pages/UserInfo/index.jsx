@@ -15,7 +15,7 @@ function UserInfo() {
 
   const handleLogout = () => {
     setLoading(true)
-    AuthServices.logout()
+    AuthServices.logOut()
       .then((res) => {
         if (res.isOk) {
           localStorage.clear()

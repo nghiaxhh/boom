@@ -1,18 +1,20 @@
 import http from '.'
-import { apiLogin, apiLogout } from './apiRouter'
+import { apiLogin, apiLogout, apiSignUp } from './apiRouter'
 
-const login = (body) =>
+const logIn = (body) =>
   http.post(apiLogin, body, {
     headers: {
       'Content-Type': 'multipart/form-data',
     },
   })
 
-const logout = (body) => http.post(apiLogout, body)
+const logOut = (body) => http.post(apiLogout, body)
+const signUp = (body) => http.post(apiSignUp, body)
 
 const AuthServices = {
-  login,
-  logout,
+  logIn,
+  logOut,
+  signUp,
 }
 
 export default AuthServices

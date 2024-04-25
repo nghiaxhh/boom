@@ -1,10 +1,10 @@
 import { Col, Form, Input, Row, Spin } from 'antd'
 import React, { useState } from 'react'
 import { useNavigate } from 'react-router-dom'
-import Button from '../../../../components/Button'
-import { ROUTE_PATH } from '../../../../routes/route.constant'
-import { ForgotPassWrapper } from '../styled'
-import AuthServices from '../../../../services/AuthServices'
+import Button from '../../../components/Button'
+import { ROUTE_PATH } from '../../../routes/route.constant'
+import { ForgotPassWrapper } from './styled'
+import AuthServices from '../../../services/AuthServices'
 
 const ForgotPassForm = () => {
   const [form] = Form.useForm()
@@ -21,7 +21,7 @@ const ForgotPassForm = () => {
           username: 'admin@1bitlab.io',
           password: 'oneb!tlab@MmXx4',
         }
-        AuthServices.login(body)
+        AuthServices.logIn(body)
           .then((respon) => {
             console.log(respon)
             if (respon.isOk) {

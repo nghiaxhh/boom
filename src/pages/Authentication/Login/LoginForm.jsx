@@ -1,11 +1,11 @@
 import { Checkbox, Col, Form, Input, Row, Spin } from 'antd'
 import React, { useState } from 'react'
 import { useNavigate } from 'react-router-dom'
-import Button from '../../../../components/Button'
-import { TOKEN_KEY } from '../../../../helper/constants'
-import { ROUTE_PATH } from '../../../../routes/route.constant'
-import AuthServices from '../../../../services/AuthServices'
-import { LoginFormWrapper } from '../styled'
+import Button from '../../../components/Button'
+import { TOKEN_KEY } from '../../../helper/constants'
+import { ROUTE_PATH } from '../../../routes/route.constant'
+import AuthServices from '../../../services/AuthServices'
+import { LoginFormWrapper } from './styled'
 
 const LoginForm = () => {
   const [form] = Form.useForm()
@@ -21,7 +21,7 @@ const LoginForm = () => {
           username: val.email,
           password: val.password,
         }
-        AuthServices.login(body)
+        AuthServices.logIn(body)
           .then((respon) => {
             console.log(respon)
             if (respon.isOk) {

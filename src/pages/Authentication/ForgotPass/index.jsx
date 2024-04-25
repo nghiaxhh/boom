@@ -1,7 +1,7 @@
 import React from 'react'
 import { LayoutCommon } from '../../../layouts/styled'
-import ForgotPassForm from './components/ForgotPassForm'
 import { AuthenticationWrapper } from './styled'
+import ForgotPassForm from './ForgotPassForm'
 
 const ForgotPass = () => {
   return (
