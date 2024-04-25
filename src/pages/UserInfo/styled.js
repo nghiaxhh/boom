@@ -7,11 +7,6 @@ export const UserInfoWrapper = styled.div`
     align-items: center;
   }
 
-  .ant-divider-horizontal {
-    margin: 0;
-    color: #d9d9d9;
-  }
-
   .abc {
     cursor: pointer;
     width: 890px;

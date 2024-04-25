@@ -77,7 +77,7 @@ const LoginForm = () => {
             </Col>
             <Col span={24}>
               <div className="mb-6 flex items-center justify-between">
-                <Form.Item name={'remember'} noStyle>
+                <Form.Item name={'remember'} valuePropName="checked" noStyle>
                   <Checkbox>Remember me</Checkbox>
                 </Form.Item>
 

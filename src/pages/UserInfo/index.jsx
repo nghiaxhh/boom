@@ -35,7 +35,7 @@ function UserInfo() {
             <img src={'./image/play_earn.png'} alt="" height={90} />
           </div>
           <Row gutter={32}>
-            <Col span={5}>
+            <Col span={6}>
               <div className="rounded-lg bg-[#F8F8F8] px-4">
                 <div className="flex h-12 gap-2">
                   <UserOutlined />
@@ -67,7 +67,7 @@ function UserInfo() {
                 </div>
               </div>
             </Col>
-            <Col span={19}>
+            <Col span={18}>
               {tabActive === 1 ? <Profile /> : <ChangePassword />}
             </Col>
           </Row>

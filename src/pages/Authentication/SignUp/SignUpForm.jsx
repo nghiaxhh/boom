@@ -5,6 +5,7 @@ import Button from '../../../components/Button'
 import { SignUpFormWrapper } from './styled'
 import { ROUTE_PATH } from '../../../routes/route.constant'
 import AuthServices from './../../../services/AuthServices'
+import { toast } from 'sonner'
 
 const SignUpForm = () => {
   const [form] = Form.useForm()
@@ -21,13 +22,13 @@ const SignUpForm = () => {
           username: values.email,
           password: values.password,
           fullname: values.fullName,
-          referalID: values.referalID,
+          referred_code: values.referalID,
         }
         setLoading(true)
         AuthServices.signUp(body)
           .then((res) => {
             if (res.isOk) {
-              console.log(res)
+              toast.success('Success')
               navigate(ROUTE_PATH.LOGIN)
             }
           })
