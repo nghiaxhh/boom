@@ -1,4 +1,4 @@
-import { Checkbox, Col, Form, Input, Row } from 'antd'
+import { Checkbox, Col, Form, Input, Row, Spin } from 'antd'
 import React, { useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 import Button from '../../../../components/Button'
@@ -7,7 +7,7 @@ import { ROUTE_PATH } from '../../../../routes/route.constant'
 import AuthServices from '../../../../services/AuthServices'
 import { LoginFormWrapper } from '../styled'
 
-const LoginForm = ({ isVisible, onCancel, onOk }) => {
+const LoginForm = () => {
   const [form] = Form.useForm()
   const navigate = useNavigate()
   const [loading, setLoading] = useState(false)
@@ -23,9 +23,10 @@ const LoginForm = ({ isVisible, onCancel, onOk }) => {
         }
         AuthServices.login(body)
           .then((respon) => {
-            if (respon.status) {
+            console.log(respon)
+            if (respon.isOk) {
               localStorage.setItem(TOKEN_KEY, JSON.stringify(respon))
-              navigate(ROUTE_PATH.DASHBOARD)
+              navigate(ROUTE_PATH.HOME)
             }
           })
 
@@ -43,7 +44,7 @@ const LoginForm = ({ isVisible, onCancel, onOk }) => {
       />
       <div className="mb-8 mt-6 text-[32px] font-bold">Welcome</div>
 
-      <div>
+      <Spin spinning={loading}>
         <Form form={form} layout="vertical" requiredMark={false}>
           <Row>
             <Col span={24}>
@@ -90,11 +91,7 @@ const LoginForm = ({ isVisible, onCancel, onOk }) => {
             </Col>
           </Row>
         </Form>
-        <Button
-          loading={loading}
-          className="mb-6 w-full"
-          onClick={handleSubmit}
-        >
+        <Button className="mb-6 w-full" onClick={handleSubmit}>
           Log in
         </Button>
         <div className="flex justify-center">
@@ -106,7 +103,7 @@ const LoginForm = ({ isVisible, onCancel, onOk }) => {
             Sign up here
           </div>
         </div>
-      </div>
+      </Spin>
     </LoginFormWrapper>
   )
 }

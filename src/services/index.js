@@ -2,6 +2,7 @@ import axios from 'axios'
 import { TOKEN_KEY } from '../helper/constants'
 import { getAccessToken, getRefreshToken, parseJwt } from '../helper/utils'
 import { ROUTE_PATH } from '../routes/route.constant'
+import { toast } from 'sonner'
 
 const http = axios.create({
   baseURL: process.env.REACT_APP_API,
@@ -70,7 +71,7 @@ http.interceptors.response.use(
       localStorage.clear()
       window.location.href = ROUTE_PATH.LOGIN
     }
-    // toast.error(error?.message)
+    toast.error(error?.message)
     return Promise.reject(error)
   }
 )

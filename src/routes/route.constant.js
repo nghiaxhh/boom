@@ -3,5 +3,5 @@ export const ROUTE_PATH = {
   LOGIN: '/login',
   SIGN_UP: '/sign-up',
   FORGOT_PASS: '/forgot-password',
-  PROFILE: '/profile',
+  USER_INFO: '/user-info',
 }

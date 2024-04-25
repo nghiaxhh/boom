@@ -10,16 +10,15 @@ function MainLayout() {
   const navigate = useNavigate()
   const isLogin = localStorage.getItem(TOKEN_KEY)
 
-  // useEffect(() => {
-  //   console.log(isLogin)
-  //   if (!isLogin) return navigate('/')
-  // }, [])
+  useEffect(() => {
+    if (!isLogin) return navigate('/')
+  }, [])
 
   return (
     <Layout>
       <Navbar />
       <Content>
-        <div className="bg-white pt-6">
+        <div className="bg-white">
           <Outlet />
         </div>
       </Content>

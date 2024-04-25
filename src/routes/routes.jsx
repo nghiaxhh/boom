@@ -10,7 +10,7 @@ import SignUp from '../pages/Authentication/SignUp'
 
 const HomePage = React.lazy(() => import('../pages/HomePage'))
 const RootPage = React.lazy(() => import('../pages/RootPage'))
-const Profile = React.lazy(() => import('../pages/Profile'))
+const UserInfo = React.lazy(() => import('../pages/UserInfo'))
 const ForgotPass = React.lazy(
   () => import('../pages/Authentication/ForgotPass')
 )
@@ -70,10 +70,10 @@ export const router = createBrowserRouter([
             ),
           },
           {
-            path: ROUTE_PATH.PROFILE,
+            path: ROUTE_PATH.USER_INFO,
             element: (
               <Suspense fallback={null}>
-                <Profile />
+                <UserInfo />
               </Suspense>
             ),
           },

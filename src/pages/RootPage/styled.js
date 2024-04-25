@@ -7,5 +7,7 @@ export const RootPageWrapper = styled.div`
     background-repeat: no-repeat;
     background-size: cover;
     background-position: center;
+    display: flex;
+    align-items: center;
   }
 `

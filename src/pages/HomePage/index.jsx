@@ -7,7 +7,7 @@ function HomePage() {
   return (
     <HomePageWrapper>
       <div className="background-header">
-        <LayoutCommon className="flex flex-col items-start justify-center">
+        <LayoutCommon>
           <Logo className="h-[234px] w-[307px]" />
           <div className="my-10 w-[432px] text-justify text-base font-bold text-white">
             BOOM ARENA is an engaging play-and-earn game that offers a thrilling
