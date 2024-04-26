@@ -6,6 +6,7 @@ import { SignUpFormWrapper } from './styled'
 import { ROUTE_PATH } from '../../../routes/route.constant'
 import AuthServices from './../../../services/AuthServices'
 import { toast } from 'sonner'
+import { isValidEmail } from '../../../helper/utils'
 
 const SignUpForm = () => {
   const [form] = Form.useForm()
@@ -78,6 +79,10 @@ const SignUpForm = () => {
                   {
                     required: true,
                     message: 'Thông tin không được để trống',
+                  },
+                  {
+                    pattern: isValidEmail(),
+                    message: 'Email không đúng định dạng',
                   },
                 ]}
               >

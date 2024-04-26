@@ -6,6 +6,7 @@ import { TOKEN_KEY } from '../../../helper/constants'
 import { ROUTE_PATH } from '../../../routes/route.constant'
 import AuthServices from '../../../services/AuthServices'
 import { LoginFormWrapper } from './styled'
+import { isValidEmail } from '../../../helper/utils'
 
 const LoginForm = () => {
   const [form] = Form.useForm()
@@ -56,6 +57,10 @@ const LoginForm = () => {
                     required: true,
                     message: 'Thông tin không được để trống',
                   },
+                  {
+                    pattern: isValidEmail(),
+                    message: 'Email không đúng định dạng',
+                  },
                 ]}
               >
                 <Input placeholder="Nhập email" />
@@ -83,7 +88,7 @@ const LoginForm = () => {
 
                 <div
                   className="cursor-pointer font-bold text-[#FF9C09]"
-                  onClick={() => navigate(ROUTE_PATH.FORGOT_PASS)}
+                  onClick={() => navigate(ROUTE_PATH.CONFIRM_EMAIL)}
                 >
                   Forgot password
                 </div>

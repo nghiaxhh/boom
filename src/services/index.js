@@ -71,7 +71,8 @@ http.interceptors.response.use(
       localStorage.clear()
       window.location.href = ROUTE_PATH.LOGIN
     }
-    toast.error(error?.response?.data?.message)
+    if (error.response.status === 404 || error.response.status === 400)
+      return toast.error(error?.response?.data?.message)
     return Promise.reject(error)
   }
 )

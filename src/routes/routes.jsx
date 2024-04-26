@@ -12,8 +12,11 @@ const HomePage = React.lazy(() => import('../pages/HomePage'))
 const RootPage = React.lazy(() => import('../pages/RootPage'))
 const UserInfo = React.lazy(() => import('../pages/UserInfo'))
 const PointSystem = React.lazy(() => import('../pages/PointSystem'))
-const ForgotPass = React.lazy(
-  () => import('../pages/Authentication/ForgotPass')
+const ConfirmEmail = React.lazy(
+  () => import('../pages/Authentication/ForgotPass/ConfirmEmail')
+)
+const ResetPassword = React.lazy(
+  () => import('../pages/Authentication/ForgotPass/ResetPassword')
 )
 
 export const router = createBrowserRouter([
@@ -50,10 +53,18 @@ export const router = createBrowserRouter([
             ),
           },
           {
-            path: ROUTE_PATH.FORGOT_PASS,
+            path: ROUTE_PATH.CONFIRM_EMAIL,
             element: (
               <Suspense fallback={null}>
-                <ForgotPass />
+                <ConfirmEmail />
+              </Suspense>
+            ),
+          },
+          {
+            path: ROUTE_PATH.RESET_PASSWORD,
+            element: (
+              <Suspense fallback={null}>
+                <ResetPassword />
               </Suspense>
             ),
           },
