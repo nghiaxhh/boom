@@ -23,14 +23,14 @@ function Navbar() {
           </div>
           <div className="flex items-center gap-[60px]">
             <div className="flex items-center gap-6">
-              <div className="cursor-pointer hover:font-bold">Game</div>
+              <div className="cursor-pointer">Game</div>
               <div
-                className="cursor-pointer hover:font-bold"
+                className="cursor-pointer"
                 onClick={() => navigate(ROUTE_PATH.POINT_SYSTEM)}
               >
                 Point System
               </div>
-              <div className="cursor-pointer hover:font-bold">Marketplace</div>
+              <div className="cursor-pointer">Marketplace</div>
             </div>
             <div className="flex items-center gap-2">
               <div>

@@ -1,5 +1,6 @@
 import PropTypes from 'prop-types'
 import { Wrapper } from './styled'
+import React from 'react'
 
 export const ListIcon = [
   'icon-image',
@@ -45,8 +46,8 @@ export default function IconSvg(props) {
               y2="29.6837"
               gradientUnits="userSpaceOnUse"
             >
-              <stop stop-color="#FF9C09" />
-              <stop offset="1" stop-color="#FF7D35" />
+              <stop stopColor="#FF9C09" />
+              <stop offset="1" stopColor="#FF7D35" />
             </linearGradient>
           </defs>
         </svg>
@@ -83,8 +84,8 @@ export default function IconSvg(props) {
               y2="30.8571"
               gradientUnits="userSpaceOnUse"
             >
-              <stop stop-color="#FF9C09" />
-              <stop offset="1" stop-color="#FF7D35" />
+              <stop stopColor="#FF9C09" />
+              <stop offset="1" stopColor="#FF7D35" />
             </linearGradient>
           </defs>
         </svg>
@@ -121,8 +122,8 @@ export default function IconSvg(props) {
               y2="28.0654"
               gradientUnits="userSpaceOnUse"
             >
-              <stop stop-color="#FF9C09" />
-              <stop offset="0.51" stop-color="#FF7D35" />
+              <stop stopColor="#FF9C09" />
+              <stop offset="0.51" stopColor="#FF7D35" />
             </linearGradient>
           </defs>
         </svg>
@@ -181,6 +182,7 @@ export default function IconSvg(props) {
 }
 
 IconSvg.propTypes = {
+  style: PropTypes.object,
   name: PropTypes.oneOf(ListIcon).isRequired,
   onClick: PropTypes.oneOfType([
     PropTypes.func,

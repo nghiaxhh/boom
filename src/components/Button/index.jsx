@@ -12,6 +12,7 @@ const Button = React.memo((props) => {
 })
 
 Button.propTypes = {
+  children: PropTypes.node,
   onClick: PropTypes.oneOfType([
     PropTypes.func,
     PropTypes.oneOf([null, undefined]),
