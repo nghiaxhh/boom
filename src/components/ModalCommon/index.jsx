@@ -7,12 +7,12 @@ const ModalCommon = (props) => {
   return (
     <ModalWrapper
       {...props}
-      title={title ?? 'thêm'}
+      title={title ?? ''}
       open={open}
-      width={width ?? '480px'}
+      width={width ?? '800px'}
       onCancel={onCancel}
       onOk={onOk}
-      // style={{ top: '20px' }}
+      style={{ top: '70px' }}
       footer={<div>{footer}</div> || null}
     >
       {children}

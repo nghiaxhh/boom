@@ -1,10 +1,12 @@
-import React from 'react'
+import React, { useState } from 'react'
 import { LayoutCommon } from '../styled'
 import { useNavigate } from 'react-router-dom'
 import { ROUTE_PATH } from '../../routes/route.constant'
+import ModalClaimReward from './ModalClaimReward'
 
 function Navbar() {
   const navigate = useNavigate()
+  const [isOpenModal, setIsOpenModal] = useState(false)
   return (
     <div className="z-[99] h-[70px] bg-white leading-[70px] shadow-[0_10px_20px_0_#0000000D]">
       <LayoutCommon>
@@ -24,19 +26,17 @@ function Navbar() {
           <div className="flex items-center gap-[60px]">
             <div className="flex items-center gap-6">
               <div className="cursor-pointer">Game</div>
-              <div
-                className="cursor-pointer"
-                onClick={() => navigate(ROUTE_PATH.POINT_SYSTEM)}
-              >
-                Point System
-              </div>
+
               <div className="cursor-pointer">Marketplace</div>
             </div>
-            <div className="flex items-center gap-2">
+            <div
+              className="flex cursor-pointer items-center gap-2"
+              onClick={() => setIsOpenModal(true)}
+            >
               <div>
                 <img src="./image/circle_star.png" alt="" />
               </div>
-              100 Points
+              100
             </div>
             <div
               className="flex cursor-pointer items-center gap-[25px]"
@@ -46,6 +46,13 @@ function Navbar() {
             </div>
           </div>
         </div>
+        {isOpenModal && (
+          <ModalClaimReward
+            isOpen={isOpenModal}
+            onCancel={() => setIsOpenModal(false)}
+            onOk={() => setIsOpenModal(false)}
+          />
+        )}
       </LayoutCommon>
     </div>
   )

@@ -6,4 +6,5 @@ export const ROUTE_PATH = {
   RESET_PASSWORD: '/reset-password',
   USER_INFO: '/user-info',
   POINT_SYSTEM: '/point-system',
+  CURRENT_BALANCE: '/current-balance',
 }

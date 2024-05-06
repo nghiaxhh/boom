@@ -17,13 +17,13 @@ export const ModalWrapper = styled(Modal)`
     font-size: 16px;
     font-style: normal;
     font-weight: 700;
-    padding: 16px 24px;
+    padding: 16px 24px 0;
     margin: 0;
   }
 
   .ant-modal-body {
-    padding: 24px;
-    max-height: calc(100vh - 174px);
+    padding: 16px 24px;
+    max-height: calc(100vh - 300px);
     overflow-y: auto;
   }
 

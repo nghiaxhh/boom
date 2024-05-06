@@ -8,6 +8,7 @@ export const ListIcon = [
   'icon-x',
   'icon-discord',
   'icon-gmail',
+  'icon-flash-fill',
 ]
 
 export default function IconSvg(props) {
@@ -15,6 +16,34 @@ export default function IconSvg(props) {
   let iconElement
 
   switch (name) {
+    case 'icon-flash-fill':
+      iconElement = (
+        <svg
+          width="12"
+          height="13"
+          viewBox="0 0 12 13"
+          fill="none"
+          xmlns="http://www.w3.org/2000/svg"
+        >
+          <g clipPath="url(#clip0_199_872)">
+            <path
+              d="M2.818 3.81799L6 0.635986L9.182 3.81799C9.81133 4.44732 10.2399 5.24915 10.4135 6.12206C10.5872 6.99497 10.4981 7.89977 10.1575 8.72204C9.81686 9.5443 9.24008 10.2471 8.50006 10.7416C7.76004 11.236 6.89002 11.4999 6 11.4999C5.10999 11.4999 4.23996 11.236 3.49994 10.7416C2.75992 10.2471 2.18315 9.5443 1.84255 8.72204C1.50195 7.89977 1.41284 6.99497 1.58646 6.12206C1.76009 5.24915 2.18867 4.44732 2.818 3.81799ZM6.5 5.99999V3.74999L4.25 6.99999H5.5V9.24999L7.75 5.99999H6.5Z"
+              fill="#0C111D"
+            />
+          </g>
+          <defs>
+            <clipPath id="clip0_199_872">
+              <rect
+                width="12"
+                height="12"
+                fill="white"
+                transform="translate(0 0.5)"
+              />
+            </clipPath>
+          </defs>
+        </svg>
+      )
+      break
     case 'icon-gmail':
       iconElement = (
         <svg

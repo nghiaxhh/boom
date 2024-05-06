@@ -24,3 +24,9 @@ export const LayoutCommon = styled.div`
     padding: 0;
   }
 `
+
+export const NavbarWrapper = styled.div`
+  .ant-modal-header {
+    padding-bottom: 0 !important;
+  }
+`

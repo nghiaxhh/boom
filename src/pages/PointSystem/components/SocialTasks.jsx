@@ -6,7 +6,7 @@ import { ReactComponent as BlueCheck } from '../../../assets/images/blue_check.s
 
 const SocialTasks = () => {
   return (
-    <div className="border-[1px] border-solid border-[#d9d9d9]">
+    <div className="[1px] border-solid border-[#d9d9d9]">
       <div className="flex justify-between px-[26px] py-7">
         <div className="font-semibold">Referral Reward Points</div>
       </div>
