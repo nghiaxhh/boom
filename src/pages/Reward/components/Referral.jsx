@@ -15,7 +15,7 @@ function Referral() {
           <td>
             <div>
               <div>Referral </div>
-              <div className="text-[10px]">
+              <div className="text-[12px]">
                 Earn 10% of total points from referred user{' '}
               </div>
             </div>

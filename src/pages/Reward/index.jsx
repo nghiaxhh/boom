@@ -1,3 +1,4 @@
+import { CopyOutlined } from '@ant-design/icons'
 import { Divider, Tabs } from 'antd'
 import React from 'react'
 import Button from '../../components/Button'
@@ -7,8 +8,11 @@ import Breakdown from './components/Breakdown'
 import Referral from './components/Referral'
 import TopRanking from './components/TopRanking'
 import { RewardWrapper } from './styled'
+import { toast } from 'sonner'
 
 function Reward() {
+  const referralId = 'https://www.ensofi.xyz/A125xx'
+
   const items = [
     {
       label: `Breakdown`,
@@ -42,10 +46,10 @@ function Reward() {
                 <IconSvg name="icon-flash-fill" />
                 <div>2.0x Boost</div>
               </div>
+              <div>Out of 10,000 points distributed</div>
             </div>
             <div>How to get boosted?</div>
           </div>
-          <div>Out of 10,000 points distributed</div>
         </div>
         <Divider />
         <div className="mb-6 flex justify-between border-[1px] border-solid border-[#000000] p-4">
@@ -55,8 +59,17 @@ function Reward() {
           </div>
           <div>
             <div className="flex gap-3">
-              <div className="flex items-center rounded-[10px] border-[1px] border-solid px-4 py-1">
-                https://www.ensofi.xyz/A125xx
+              <div className="group relative flex items-center gap-2 rounded-[10px] border-[1px] border-solid px-4 py-1">
+                {referralId}
+                <div
+                  onClick={() => {
+                    navigator.clipboard.writeText(referralId)
+                    toast.success('Copied')
+                  }}
+                  className="absolute right-2 top-1/2 hidden h-9 w-9 -translate-y-1/2 cursor-pointer justify-center rounded-[36px] bg-slate-200 group-hover:flex "
+                >
+                  <CopyOutlined />
+                </div>
               </div>
               <IconSvg name="icon-x" />
             </div>
