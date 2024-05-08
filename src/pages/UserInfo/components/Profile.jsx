@@ -4,14 +4,18 @@ import IconSvg from '../../../components/SvgIcon'
 import { getBase64 } from '../../../helper/utils'
 import Button from '../../../components/Button'
 import UserServices from '../../../services/UserServices'
+import FileServices from '../../../services/FileServices'
+import { toast } from 'sonner'
 
 function Profile() {
   const [form] = Form.useForm()
   const [previewOpen, setPreviewOpen] = useState(false)
   const [previewImage, setPreviewImage] = useState('')
-  const [fileList, setFileList] = useState([])
+
+  const [fileCover, setFileCover] = useState([])
   const [fileAvatar, setFileAvatar] = useState([])
   const [loading, setLoading] = useState(false)
+  const [disabled, setDisabled] = useState(true)
 
   const uploadProps = {
     accept: 'image/png, image/jpeg',
@@ -27,7 +31,7 @@ function Profile() {
     setPreviewOpen(true)
   }
 
-  const handleChange = ({ fileList: newFileList }) => setFileList(newFileList)
+  const handleChange = ({ fileList: newFileList }) => setFileCover(newFileList)
   const onChangeFileAvatar = ({ fileList: newFileList }) =>
     setFileAvatar(newFileList)
 
@@ -39,7 +43,7 @@ function Profile() {
           const userInfo = res.data
           form.setFieldsValue({
             referalID: userInfo.referral_code,
-            gameName: userInfo.fullname,
+            fullname: userInfo.fullname,
             email: userInfo.username,
             description: userInfo.description,
           })
@@ -53,9 +57,40 @@ function Profile() {
     getInfo()
   }, [])
 
-  const handleSubmit = () => {
-    const value = form.getFieldsValue()
-    console.log(value)
+  const handleSubmit = async () => {
+    const values = form.getFieldsValue()
+    let responAvatar = null
+    let responCover = null
+    setLoading(true)
+    if (!fileAvatar.length) {
+      responAvatar = await FileServices.uploadFile({
+        file: fileAvatar[0]?.originFileObj,
+      })
+    }
+    if (!fileCover.length) {
+      responCover = await FileServices.uploadFile({
+        file: fileAvatar[0]?.originFileObj,
+      })
+    }
+    console.log(responAvatar, responCover)
+
+    const body = {
+      description: values.description,
+      fullname: values.fullname,
+      ...(responAvatar?.isOk && {
+        profile_img: responAvatar.data.file_name,
+      }),
+      ...(responCover?.isOk && {
+        cover_img: responCover.data.file_name,
+      }),
+    }
+
+    const res = await UserServices.updateUser(body)
+    if (res?.isOk) {
+      toast.success('Success')
+      getInfo()
+    }
+    setLoading(false)
   }
 
   return (
@@ -63,7 +98,10 @@ function Profile() {
       <div className="border-[1px] border-solid border-[#d9d9d9]">
         <div className="flex justify-between px-[26px] py-7">
           <div className="font-semibold">My Profile</div>
-          <div className="flex">
+          <div
+            className="flex cursor-pointer"
+            onClick={() => setDisabled(false)}
+          >
             <IconSvg name="icon-pencil" />
             Edit Profile
           </div>
@@ -74,15 +112,15 @@ function Profile() {
           <Upload
             {...uploadProps}
             listType="picture"
-            fileList={fileList}
+            fileList={fileCover}
             onPreview={handlePreview}
             onChange={handleChange}
             beforeUpload={(file) => {
-              setFileList([...fileList, file])
+              setFileCover([...fileCover, file])
               return false
             }}
           >
-            {fileList.length >= 1 ? null : (
+            {fileCover.length >= 1 ? null : (
               <div className="abc flex">
                 <IconSvg name="icon-image" />
                 Upload
@@ -98,24 +136,27 @@ function Profile() {
             <Row>
               <Col span={16}>
                 <Form.Item name="referalID" label="Referal ID">
-                  <Input />
+                  <Input disabled={disabled} />
                 </Form.Item>
-                <Form.Item name="gameName" label="Game name">
-                  <Input />
+                <Form.Item name="fullname" label="Game name">
+                  <Input disabled={disabled} />
                 </Form.Item>
                 <Form.Item name="email" label="Email">
-                  <Input />
+                  <Input disabled={disabled} />
                 </Form.Item>
                 <Form.Item name="description" label="Description">
-                  <Input.TextArea />
+                  <Input.TextArea disabled={disabled} />
                 </Form.Item>
                 <Form.Item label=" ">
-                  <Button onClick={handleSubmit}>Save</Button>
+                  <Button disabled={disabled} onClick={handleSubmit}>
+                    Save
+                  </Button>
                 </Form.Item>
               </Col>
               <Col span={8} className="flex flex-col justify-center">
                 <Upload
                   {...uploadProps}
+                  disabled={disabled}
                   listType="picture-circle"
                   fileList={fileAvatar}
                   onChange={onChangeFileAvatar}

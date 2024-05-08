@@ -8,3 +8,7 @@ export const apiResetPassword = '/api/v1/auth/reset-password/'
 
 // Users
 export const apiGetMe = '/api/v1/users/me'
+export const apiUpdateUser = '/api/v1/users/'
+
+// Files
+export const apiUploadFile = '/api/v1/files/upload'
