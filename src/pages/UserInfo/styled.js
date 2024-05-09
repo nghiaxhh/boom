@@ -16,7 +16,7 @@ export const UserInfoWrapper = styled.div`
     width: 100%;
   }
 
-  .abc {
+  .cover-image {
     cursor: pointer;
     width: 100%;
     height: 200px;
@@ -27,6 +27,5 @@ export const UserInfoWrapper = styled.div`
     color: white;
     flex-direction: column;
     justify-content: center;
-    margin: 0 0 22px;
   }
 `

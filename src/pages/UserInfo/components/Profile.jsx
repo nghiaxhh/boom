@@ -11,7 +11,8 @@ function Profile() {
   const [form] = Form.useForm()
   const [previewOpen, setPreviewOpen] = useState(false)
   const [previewImage, setPreviewImage] = useState('')
-
+  const [changeAvatar, setChangeAvatar] = useState(false)
+  const [changeCoverImg, setChangeCoverImg] = useState(false)
   const [fileCover, setFileCover] = useState([])
   const [fileAvatar, setFileAvatar] = useState([])
   const [loading, setLoading] = useState(false)
@@ -31,9 +32,10 @@ function Profile() {
     setPreviewOpen(true)
   }
 
-  const handleChange = ({ fileList: newFileList }) => setFileCover(newFileList)
-  const onChangeFileAvatar = ({ fileList: newFileList }) =>
+  const onChangeFileAvatar = ({ fileList: newFileList }) => {
+    setChangeAvatar(true)
     setFileAvatar(newFileList)
+  }
 
   const getInfo = () => {
     setLoading(true)
@@ -41,12 +43,22 @@ function Profile() {
       .then((res) => {
         if (res.isOk) {
           const userInfo = res.data
+
           form.setFieldsValue({
             referalID: userInfo.referral_code,
             fullname: userInfo.fullname,
             email: userInfo.username,
             description: userInfo.description,
           })
+          !!userInfo?.profile_img &&
+            setFileAvatar([
+              {
+                url:
+                  process.env.REACT_APP_API +
+                  '/api/v1/files/download?fileName=' +
+                  userInfo?.profile_img,
+              },
+            ])
         }
       })
       .catch(() => {})
@@ -59,17 +71,18 @@ function Profile() {
 
   const handleSubmit = async () => {
     const values = form.getFieldsValue()
+    console.log(values)
     let responAvatar = null
     let responCover = null
     setLoading(true)
-    if (!fileAvatar.length) {
+    if (fileAvatar.length && changeAvatar) {
       responAvatar = await FileServices.uploadFile({
         file: fileAvatar[0]?.originFileObj,
       })
     }
-    if (!fileCover.length) {
+    if (fileCover.length && changeCoverImg) {
       responCover = await FileServices.uploadFile({
-        file: fileAvatar[0]?.originFileObj,
+        file: fileCover[0]?.originFileObj,
       })
     }
     console.log(responAvatar, responCover)
@@ -93,6 +106,14 @@ function Profile() {
     setLoading(false)
   }
 
+  const handleCropImage = (fileList) => {
+    console.log(fileList[0])
+    if (fileList[0]?.size > 1024 * 10 * 1024)
+      return toast.error('Kích thước ảnh quá lớn')
+    setChangeCoverImg(true)
+    return setFileCover(fileList[0])
+  }
+
   return (
     <Spin spinning={loading}>
       <div className="border-[1px] border-solid border-[#d9d9d9]">
@@ -109,24 +130,21 @@ function Profile() {
         <Divider />
 
         <div className="px-[26px] pt-6">
-          <Upload
-            {...uploadProps}
-            listType="picture"
-            fileList={fileCover}
-            onPreview={handlePreview}
-            onChange={handleChange}
-            beforeUpload={(file) => {
-              setFileCover([...fileCover, file])
-              return false
-            }}
-          >
-            {fileCover.length >= 1 ? null : (
-              <div className="abc flex">
+          <div className="mb-6">
+            <label>
+              <div className="cover-image flex">
                 <IconSvg name="icon-image" />
                 Upload
+                <input
+                  hidden
+                  type="file"
+                  id="avatar"
+                  accept="image/jpg,image/jpeg"
+                  onChange={(e) => handleCropImage(e.target.files)}
+                />
               </div>
-            )}
-          </Upload>
+            </label>
+          </div>
           <Form
             form={form}
             colon={false}
@@ -154,20 +172,22 @@ function Profile() {
                 </Form.Item>
               </Col>
               <Col span={8} className="flex flex-col justify-center">
-                <Upload
-                  {...uploadProps}
-                  disabled={disabled}
-                  listType="picture-circle"
-                  fileList={fileAvatar}
-                  onChange={onChangeFileAvatar}
-                  onPreview={handlePreview}
-                  beforeUpload={(file) => {
-                    setFileAvatar([...fileAvatar, file])
-                    return false
-                  }}
-                >
-                  {fileAvatar.length < 1 && 'Avatar'}
-                </Upload>
+                <Form.Item name="avatar" label="">
+                  <Upload
+                    {...uploadProps}
+                    disabled={disabled}
+                    listType="picture-circle"
+                    fileList={fileAvatar}
+                    onChange={onChangeFileAvatar}
+                    onPreview={handlePreview}
+                    beforeUpload={(file) => {
+                      setFileAvatar([...fileAvatar, file])
+                      return false
+                    }}
+                  >
+                    {fileAvatar.length < 1 && 'Avatar'}
+                  </Upload>
+                </Form.Item>
 
                 {fileAvatar.length < 1 && <div>Maximum capacity 5 MB</div>}
                 {fileAvatar.length < 1 && <div>Format: .JPEG, .PNG</div>}
