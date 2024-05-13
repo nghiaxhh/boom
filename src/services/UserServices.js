@@ -1,12 +1,14 @@
 import http from '.'
-import { apiGetMe, apiUpdateUser } from './apiRouter'
+import { apiChangePass, apiGetMe, apiUpdateUser } from './apiRouter'
 
 const getMe = () => http.get(apiGetMe)
 const updateUser = (body) => http.put(apiUpdateUser, body)
+const changePassword = (body) => http.post(apiChangePass, body)
 
 const UserServices = {
   getMe,
   updateUser,
+  changePassword,
 }
 
 export default UserServices

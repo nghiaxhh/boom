@@ -1,5 +1,6 @@
+/* eslint-disable no-unused-vars */
 import { Col, Divider, Form, Image, Input, Row, Spin, Upload } from 'antd'
-import React, { useEffect, useState } from 'react'
+import React, { useEffect, useRef, useState } from 'react'
 import IconSvg from '../../../components/SvgIcon'
 import { getBase64 } from '../../../helper/utils'
 import Button from '../../../components/Button'
@@ -9,11 +10,16 @@ import { toast } from 'sonner'
 
 function Profile() {
   const [form] = Form.useForm()
+  const fileCoverRef = useRef()
+
   const [previewOpen, setPreviewOpen] = useState(false)
   const [previewImage, setPreviewImage] = useState('')
   const [changeAvatar, setChangeAvatar] = useState(false)
   const [changeCoverImg, setChangeCoverImg] = useState(false)
-  const [fileCover, setFileCover] = useState([])
+  const [fileCover, setFileCover] = useState({})
+  const [linkImg, setLinkImg] = useState(
+    process.env.PUBLIC_URL + '/image/cover_image.png'
+  )
   const [fileAvatar, setFileAvatar] = useState([])
   const [loading, setLoading] = useState(false)
   const [disabled, setDisabled] = useState(true)
@@ -59,6 +65,12 @@ function Profile() {
                   userInfo?.profile_img,
               },
             ])
+          !!userInfo?.cover_img &&
+            setLinkImg(
+              process.env.REACT_APP_API +
+                '/api/v1/files/download?fileName=' +
+                userInfo?.cover_img
+            )
         }
       })
       .catch(() => {})
@@ -71,7 +83,7 @@ function Profile() {
 
   const handleSubmit = async () => {
     const values = form.getFieldsValue()
-    console.log(values)
+
     let responAvatar = null
     let responCover = null
     setLoading(true)
@@ -80,12 +92,11 @@ function Profile() {
         file: fileAvatar[0]?.originFileObj,
       })
     }
-    if (fileCover.length && changeCoverImg) {
+    if (!!fileCover && changeCoverImg) {
       responCover = await FileServices.uploadFile({
-        file: fileCover[0]?.originFileObj,
+        file: fileCover,
       })
     }
-    console.log(responAvatar, responCover)
 
     const body = {
       description: values.description,
@@ -106,12 +117,15 @@ function Profile() {
     setLoading(false)
   }
 
-  const handleCropImage = (fileList) => {
-    console.log(fileList[0])
-    if (fileList[0]?.size > 1024 * 10 * 1024)
+  const handleChangeCoverPhoto = () => {
+    const uploadedFile = fileCoverRef.current.files[0]
+    const cachedURL = URL.createObjectURL(uploadedFile)
+    if (uploadedFile?.size > 1024 * 5 * 1024)
       return toast.error('Kích thước ảnh quá lớn')
     setChangeCoverImg(true)
-    return setFileCover(fileList[0])
+    setLinkImg(cachedURL)
+    console.log(uploadedFile)
+    setFileCover(uploadedFile)
   }
 
   return (
@@ -130,19 +144,23 @@ function Profile() {
         <Divider />
 
         <div className="px-[26px] pt-6">
-          <div className="mb-6">
-            <label>
-              <div className="cover-image flex">
+          <div className="group relative mb-6">
+            <img src={linkImg} alt="" className="h-[200px] w-full" />
+
+            <label className="absolute left-0 top-0  flex h-[200px] w-full cursor-pointer items-center justify-center">
+              <div className="hidden text-white group-hover:block">
                 <IconSvg name="icon-image" />
                 Upload
-                <input
-                  hidden
-                  type="file"
-                  id="avatar"
-                  accept="image/jpg,image/jpeg"
-                  onChange={(e) => handleCropImage(e.target.files)}
-                />
               </div>
+              <input
+                disabled={disabled}
+                hidden
+                ref={fileCoverRef}
+                type="file"
+                id="avatar"
+                accept="image/*"
+                onChange={handleChangeCoverPhoto}
+              />
             </label>
           </div>
           <Form

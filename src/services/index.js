@@ -70,9 +70,12 @@ http.interceptors.response.use(
     if (error.response && error.response.status === 401) {
       localStorage.clear()
       window.location.href = ROUTE_PATH.LOGIN
+      return
     }
-    if (error.response.status === 404 || error.response.status === 400)
+    console.log(error)
+    if (error.response?.status === 404 || error.response?.status === 400)
       return toast.error(error?.response?.data?.message)
+
     return Promise.reject(error)
   }
 )
