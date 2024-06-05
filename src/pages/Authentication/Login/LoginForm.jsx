@@ -24,7 +24,6 @@ const LoginForm = () => {
         }
         AuthServices.logIn(body)
           .then((respon) => {
-            console.log(respon)
             if (respon.isOk) {
               localStorage.setItem(TOKEN_KEY, JSON.stringify(respon))
               navigate(ROUTE_PATH.HOME)

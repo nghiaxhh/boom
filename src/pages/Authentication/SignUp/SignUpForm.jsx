@@ -1,3 +1,4 @@
+/* eslint-disable no-unused-vars */
 import { Checkbox, Col, Form, Input, Row, Spin } from 'antd'
 import React, { useState } from 'react'
 import { useNavigate } from 'react-router-dom'
@@ -7,34 +8,63 @@ import { ROUTE_PATH } from '../../../routes/route.constant'
 import AuthServices from './../../../services/AuthServices'
 import { toast } from 'sonner'
 import { isValidEmail } from '../../../helper/utils'
+import { useSDK } from '@metamask/sdk-react'
 
 const SignUpForm = () => {
   const [form] = Form.useForm()
   const navigate = useNavigate()
   const isDisableButton = !Form.useWatch('termsServices', form)
   const [loading, setLoading] = useState(false)
+  const { sdk } = useSDK()
+  const message = 'Login with Boom'
+
+  const handleConnectMetamask = async () => {
+    sdk?.disconnect()
+    sdk?.terminate()
+    const userInfo = await sdk
+      ?.connect()
+      .then(async (accounts) => {
+        let signature = await sdk.getProvider().request({
+          method: 'personal_sign',
+          params: [accounts[0], message],
+        })
+
+        let dataUser = {
+          address_wallet: accounts[0],
+          signature: signature,
+          message: message,
+        }
+
+        return dataUser
+      })
+      .catch(() => {})
+    return userInfo
+  }
 
   const handleSubmitForm = () => {
     form
       .validateFields()
-      .then((values) => {
-        console.log(values)
+      .then(async (values) => {
+        const userInfo = await handleConnectMetamask()
+
         const body = {
+          web3_wallet_address: userInfo.address_wallet,
+          message: userInfo.message,
+          signature: userInfo.signature,
           username: values.email,
           password: values.password,
           fullname: values.fullName,
           referred_code: values.referalID,
         }
         setLoading(true)
-        AuthServices.signUp(body)
-          .then((res) => {
-            if (res.isOk) {
-              toast.success('Success')
-              navigate(ROUTE_PATH.LOGIN)
-            }
-          })
-          .catch(() => {})
-          .finally(() => setLoading(false))
+        const res = await AuthServices.signUp(body)
+
+        if (res.isOk) {
+          toast.success('Success')
+          navigate(ROUTE_PATH.LOGIN)
+        }
+
+        setLoading(false)
       })
       .catch(() => {})
   }
@@ -54,7 +84,7 @@ const SignUpForm = () => {
           layout="vertical"
           requiredMark={false}
           autoComplete="off"
-          onValuesChange={(changeValue) => console.log(changeValue)}
+          // onValuesChange={(changeValue) => console.log(changeValue)}
         >
           <Row>
             <Col span={24}>

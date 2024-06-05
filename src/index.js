@@ -6,6 +6,7 @@ import App from './App'
 import reportWebVitals from './reportWebVitals'
 import './styles/index.css'
 import { store } from './store/store'
+import { MetaMaskProvider } from '@metamask/sdk-react'
 
 const root = ReactDOM.createRoot(document.getElementById('root'))
 
@@ -21,7 +22,25 @@ root.render(
         },
       }}
     >
-      <App />
+      <MetaMaskProvider
+        debug={false}
+        sdkOptions={{
+          logging: {
+            developerMode: false,
+          },
+          checkInstallationImmediately: false, // This will automatically connect to MetaMask on page load
+          dappMetadata: {
+            name: 'Boom Arena',
+            url: window.location.host,
+          },
+          i18nOptions: {
+            enabled: true,
+          },
+          i18nInstance: 'jp',
+        }}
+      >
+        <App />
+      </MetaMaskProvider>
     </ConfigProvider>
   </Provider>
   // </React.StrictMode>,

@@ -19,8 +19,8 @@ export default function ResetPassword() {
   const token = queryString.parseUrl(location.search)?.query?.token
 
   useEffect(() => {
-    console.log(!token?.exp)
-    console.log(token?.exp * 1000 < Date.now())
+    // console.log(!token?.exp)
+    // console.log(token?.exp * 1000 < Date.now())
     if (!parseJwt(token)?.exp || parseJwt(token)?.exp * 1000 < Date.now())
       return navigate(ROUTE_PATH.HOME)
   }, [])

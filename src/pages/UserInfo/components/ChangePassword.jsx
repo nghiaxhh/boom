@@ -12,7 +12,6 @@ const ChangePassword = () => {
     form
       .validateFields()
       .then((values) => {
-        console.log(values)
         setLoading(true)
         const body = {
           curr_password: values.password,
