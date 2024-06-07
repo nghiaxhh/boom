@@ -3,6 +3,7 @@ import React from 'react'
 import ReactDOM from 'react-dom/client'
 import { Provider } from 'react-redux'
 import App from './App'
+import { StyleProvider } from '@ant-design/cssinjs'
 import reportWebVitals from './reportWebVitals'
 import './styles/index.css'
 import { store } from './store/store'
@@ -18,8 +19,9 @@ root.render(
         token: {
           // Seed Token
           controlHeight: 40,
-          borderRadius: 0,
+          borderRadius: 6,
         },
+        hashed: false,
       }}
     >
       <MetaMaskProvider
@@ -39,7 +41,9 @@ root.render(
           i18nInstance: 'jp',
         }}
       >
-        <App />
+        <StyleProvider layer>
+          <App />
+        </StyleProvider>
       </MetaMaskProvider>
     </ConfigProvider>
   </Provider>

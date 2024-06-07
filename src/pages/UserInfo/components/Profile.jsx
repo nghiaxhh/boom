@@ -124,7 +124,6 @@ function Profile() {
       return toast.error('Kích thước ảnh quá lớn')
     setChangeCoverImg(true)
     setLinkImg(cachedURL)
-    console.log(uploadedFile)
     setFileCover(uploadedFile)
   }
 

@@ -35,8 +35,8 @@ ModalCommon.propTypes = {
   ]),
 }
 
-ModalCommon.defaultProps = {
-  onCancel: null,
-  onOk: null,
-}
+// ModalCommon.defaultProps = {
+//   onCancel: null,
+//   onOk: null,
+// }
 export default ModalCommon

@@ -51,10 +51,8 @@ const ConfirmEmail = () => {
 
         AuthServices.confirmEmail({ email: value.email })
           .then((respon) => {
-            console.log(respon)
             if (respon.isOk) {
               countDown()
-              console.log(respon)
             }
           })
 

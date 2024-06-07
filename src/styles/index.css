@@ -1,7 +1,12 @@
 @import './reset.scss';
 
+@layer tailwind-base, antd;
+
+@layer tailwind-base {
+  @tailwind base;
+}
+
 @tailwind utilities;
-@tailwind base;
 @tailwind components;
 
 .ant-divider-horizontal {

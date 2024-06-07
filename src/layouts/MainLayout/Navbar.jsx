@@ -2,7 +2,7 @@ import React, { useState } from 'react'
 import { LayoutCommon } from '../styled'
 import { useNavigate } from 'react-router-dom'
 import { ROUTE_PATH } from '../../routes/route.constant'
-import ModalClaimReward from './ModalClaimReward'
+import ModalClaimReward from '../../pages/HomePage/components/ModalClaimReward'
 
 function Navbar() {
   const navigate = useNavigate()

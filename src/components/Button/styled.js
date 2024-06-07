@@ -6,7 +6,7 @@ export const ButtonStyled = styled(Button)`
   align-items: center;
   justify-content: center;
   background-color: ${({ disabled, bg_color }) =>
-    disabled ? '#CECECE' : bg_color ? bg_color : '#FF9C09'};
+    disabled ? '#b7b0ac' : bg_color ? bg_color : '#FF9C09'};
   font-size: ${({ size }) => (size ? size : 14)}px;
 
   font-weight: 700;

@@ -42,3 +42,8 @@ th {
 table {
   width: 100%;
 }
+
+.ant-spin-nested-loading > div > .ant-spin .ant-spin-dot {
+  width: unset;
+  height: unset;
+}

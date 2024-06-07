@@ -1,0 +1,201 @@
+/* eslint-disable no-unused-vars */
+import React, { useEffect, useState } from 'react'
+import ModalCommon from '../../../components/ModalCommon/index'
+import { Input, Spin } from 'antd'
+import IconSvg from '../../../components/SvgIcon'
+import Button from '../../../components/Button'
+import { useNavigate } from 'react-router-dom'
+import { ROUTE_PATH } from '../../../routes/route.constant'
+import UserServices from '../../../services/UserServices'
+
+function ModalClaimReward({ isOpen, onOk, onCancel }) {
+  const navigate = useNavigate()
+  const [loading, setLoading] = useState(false)
+  const [listMission, setListMission] = useState({})
+
+  const getClaimRewards = () => {
+    setLoading(true)
+    UserServices.getRewards()
+      .then((res) => {
+        if (res.isOk) {
+          console.log(res)
+          setListMission(res.data)
+        }
+      })
+      .catch(() => {})
+      .finally(() => setLoading(false))
+  }
+
+  useEffect(() => {
+    getClaimRewards()
+  }, [])
+
+  const handleClaimRewards = (method, points) => {
+    setLoading(true)
+    UserServices.claimRewards({
+      points,
+      method,
+    })
+      .then((res) => {
+        if (res.isOk) {
+          getClaimRewards()
+        }
+      })
+      .catch(() => {})
+      .finally(() => setLoading(false))
+  }
+
+  return (
+    <ModalCommon
+      onOk={onOk}
+      onCancel={onCancel}
+      open={isOpen}
+      title={
+        <div className="flex flex-col items-center">
+          <div className="text-2xl font-bold">Current Balance</div>
+          <div className="flex items-center gap-1">
+            <img src="./image/circle_star.png" alt="" className="h-[14px]" />
+            <div>{listMission?.point}</div>
+          </div>
+          {listMission?.boosted && (
+            <div className="flex gap-1">
+              <IconSvg name="icon-flash-fill" />
+              <div>2.0 Boost</div>
+            </div>
+          )}
+          <div>Out of 10,000 points distributed</div>
+        </div>
+      }
+      footer={
+        <div className="flex justify-center">
+          <Button
+            onClick={() => {
+              onCancel()
+              navigate(ROUTE_PATH.CURRENT_BALANCE)
+            }}
+          >
+            View details
+          </Button>
+        </div>
+      }
+    >
+      <Spin spinning={loading}>
+        <div className="m-5 flex justify-between rounded-[10px] border-[1px] border-solid border-[#0000001A] bg-[#FBFDFF] px-[18px] py-3">
+          <div>
+            <div className="mb-3 text-lg font-semibold">
+              Claim your daily points
+            </div>
+
+            <div className="mb-2 text-xs text-[#FF9C09]">
+              You can claim every 6 hours
+            </div>
+          </div>
+          <div className="flex items-center">
+            <Button
+              disabled={!listMission?.daily_allowed}
+              onClick={() =>
+                handleClaimRewards('DAILY', listMission?.daily_points)
+              }
+            >
+              Claim
+            </Button>
+          </div>
+        </div>
+        <div className="m-5 flex justify-between rounded-[10px] border-[1px] border-solid border-[#0000001A] bg-[#FBFDFF] px-[18px] py-3">
+          <div>
+            <div className="mb-3 text-lg font-semibold">
+              Refer friends and earn rewards!
+            </div>
+            {/* <div className="mb-6">
+              Introduce a friend to BOOM and you’ll earn 10% the points earned
+              by your friend and get a bonus to accelerate your own points
+              growth
+            </div> */}
+            <div className="mb-2 text-xs text-[#FF9C09]">
+              Earn 10% of total points from referred user
+            </div>
+            <div className="flex gap-3">
+              <div className="flex h-[50px] w-[200px] items-center justify-center rounded-[10px] border-[1px] border-solid border-gray-400 font-bold">
+                {listMission?.referral_code}
+              </div>
+              <IconSvg name="icon-x" />
+              {/* <IconSvg name="icon-discord"  />
+              <IconSvg name="icon-gmail" /> */}
+            </div>
+          </div>
+          <div className="flex items-center">
+            <Button>Copy</Button>
+          </div>
+        </div>
+        <div className="m-5 flex justify-between rounded-[10px] border-[1px] border-solid border-[#0000001A] bg-[#FBFDFF] px-[18px] py-3">
+          <div>
+            <div className="mb-3 text-lg font-semibold">Win a match</div>
+
+            <div className="mb-2 text-xs text-[#FF9C09]">
+              Earn 10 points per match
+            </div>
+          </div>
+          <div className="flex items-center">
+            <Button
+              disabled={!listMission?.winning_matches_allowed}
+              onClick={() => {
+                handleClaimRewards(
+                  'WINNING_MATCHES',
+                  listMission?.winning_matches_points
+                )
+              }}
+            >
+              {listMission?.winning_matches_points}
+            </Button>
+          </div>
+        </div>
+        <div className="m-5 flex justify-between rounded-[10px] border-[1px] border-solid border-[#0000001A] bg-[#FBFDFF] px-[18px] py-3">
+          <div>
+            <div className="mb-3 text-lg font-semibold">Play 10 matches</div>
+
+            <div className="mb-2 text-xs text-[#FF9C09]">
+              Earn 10 points by playing 10 matches. Once per day
+            </div>
+          </div>
+          <div className="flex items-center">
+            <Button
+              disabled={!listMission?.ten_matches_allowed}
+              onClick={() =>
+                handleClaimRewards(
+                  'TEN_MATCHES',
+                  listMission?.ten_matches_points
+                )
+              }
+            >
+              {listMission?.ten_matches_points}
+            </Button>
+          </div>
+        </div>
+        <div className="m-5 flex justify-between rounded-[10px] border-[1px] border-solid border-[#0000001A] bg-[#FBFDFF] px-[18px] py-3">
+          <div>
+            <div className="mb-3 text-lg font-semibold">Play 20 matches</div>
+
+            <div className="mb-2 text-xs text-[#FF9C09]">
+              Earn 30 points by playing 20 matches. Once per day
+            </div>
+          </div>
+          <div className="flex items-center">
+            <Button
+              disabled={!listMission?.twenty_matches_allowed}
+              onClick={() =>
+                handleClaimRewards(
+                  'TWENTY_MATCHES',
+                  listMission?.twenty_matches_points
+                )
+              }
+            >
+              {listMission?.twenty_matches_points}
+            </Button>
+          </div>
+        </div>
+      </Spin>
+    </ModalCommon>
+  )
+}
+
+export default ModalClaimReward

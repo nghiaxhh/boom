@@ -62,7 +62,7 @@ const LoginForm = () => {
                   },
                 ]}
               >
-                <Input placeholder="Nhập email" />
+                <Input />
               </Form.Item>
             </Col>
             <Col span={24}>
@@ -76,7 +76,7 @@ const LoginForm = () => {
                   },
                 ]}
               >
-                <Input.Password placeholder="Nhập mật khẩu" />
+                <Input.Password />
               </Form.Item>
             </Col>
             <Col span={24}>
