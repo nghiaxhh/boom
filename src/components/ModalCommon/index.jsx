@@ -12,7 +12,8 @@ const ModalCommon = (props) => {
       width={width ?? '800px'}
       onCancel={onCancel}
       onOk={onOk}
-      style={{ top: '70px' }}
+      centered
+      // style={{ top: '20px' }}
       footer={<div>{footer}</div> || null}
     >
       {children}
