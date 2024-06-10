@@ -23,7 +23,7 @@ export const ModalWrapper = styled(Modal)`
 
   .ant-modal-body {
     padding: 16px 24px;
-    max-height: calc(100vh - 300px);
+    max-height: calc(100vh - 180px);
     overflow-y: auto;
   }
 
