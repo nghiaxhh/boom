@@ -1,11 +1,9 @@
-/* eslint-disable no-unused-vars */
 import { Spin } from 'antd'
 import React, { useEffect, useRef, useState } from 'react'
 import { FaCheck } from 'react-icons/fa6'
 import { GoCopy } from 'react-icons/go'
 import { useNavigate } from 'react-router-dom'
 import Button from '../../../components/Button'
-
 import ModalCommon from '../../../components/ModalCommon/index'
 import IconSvg from '../../../components/SvgIcon'
 import { ROUTE_PATH } from '../../../routes/route.constant'
@@ -20,6 +18,7 @@ function ModalClaimReward({ isOpen, onOk, onCancel }) {
   const [listMission, setListMission] = useState({})
   const [isValidDailyClaim, setIsValidDailyClaim] = useState(false)
   const [timeCountdown, setTimeCountdown] = useState([])
+  const [isClearInterval, setIsClearInterval] = useState(false)
 
   const getClaimRewards = () => {
     setLoading(true)
@@ -28,6 +27,7 @@ function ModalClaimReward({ isOpen, onOk, onCancel }) {
         if (res.isOk) {
           setListMission(res.data)
           setIsValidDailyClaim(res.data?.daily_allowed)
+
           if (res.data.daily_allowed) {
             setIsValidDailyClaim(true)
           } else {
@@ -41,22 +41,18 @@ function ModalClaimReward({ isOpen, onOk, onCancel }) {
 
   const getCountdown = (timeUp) => {
     const now = dayjs().unix()
-    const timeRemaining = dayjs(timeUp).unix() - now
+    const timeRemaining = dayjs(timeUp).add(13, 'hour').unix() - now
 
     const hours = Math.floor((timeRemaining % (60 * 60 * 24)) / (60 * 60))
     const minutes = Math.floor((timeRemaining % (60 * 60)) / 60)
     const seconds = Math.floor(timeRemaining % 60)
-    setTimeCountdown([hours, minutes, seconds])
+    if (timeRemaining > 0) setTimeCountdown([hours, minutes, seconds])
+    else setIsClearInterval(true)
   }
 
   const startCountdown = (date) => {
-    if (ref.current) {
-      setIsValidDailyClaim(true)
-      clearInterval(ref.current)
-    }
     const id = setInterval(() => {
       getCountdown(date)
-      console.log(ref.current)
     }, 1000)
     ref.current = id
   }
@@ -67,6 +63,13 @@ function ModalClaimReward({ isOpen, onOk, onCancel }) {
       clearInterval(ref.current)
     }
   }, [])
+
+  useEffect(() => {
+    if (isClearInterval) {
+      clearInterval(ref.current)
+      setIsValidDailyClaim(true)
+    }
+  }, [isClearInterval])
 
   const handleClaimRewards = (method, points) => {
     setLoading(true)
