@@ -5,8 +5,8 @@ export const ButtonStyled = styled(Button)`
   display: flex;
   align-items: center;
   justify-content: center;
-  background-color: ${({ disabled, bg_color }) =>
-    disabled ? '#CECECE' : bg_color ? bg_color : '#FF9C09'};
+  background-color: ${({ disabled, bgColor }) =>
+    disabled ? '#b7b0ac' : bgColor ? bgColor : '#FF9C09'} !important;
   font-size: ${({ size }) => (size ? size : 14)}px;
 
   font-weight: 700;

@@ -218,7 +218,3 @@ IconSvg.propTypes = {
     PropTypes.oneOf([null, undefined]),
   ]),
 }
-
-IconSvg.defaultProps = {
-  onClick: null,
-}

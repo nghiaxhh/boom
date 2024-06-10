@@ -60,14 +60,6 @@ export const router = createBrowserRouter([
               </Suspense>
             ),
           },
-          {
-            path: ROUTE_PATH.RESET_PASSWORD,
-            element: (
-              <Suspense fallback={null}>
-                <ResetPassword />
-              </Suspense>
-            ),
-          },
         ],
       },
       {
@@ -98,6 +90,14 @@ export const router = createBrowserRouter([
             ),
           },
         ],
+      },
+      {
+        path: ROUTE_PATH.RESET_PASSWORD,
+        element: (
+          <Suspense fallback={null}>
+            <ResetPassword />
+          </Suspense>
+        ),
       },
     ],
   },
