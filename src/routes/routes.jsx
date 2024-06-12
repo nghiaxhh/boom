@@ -11,7 +11,7 @@ import SignUp from '../pages/Authentication/SignUp'
 const HomePage = React.lazy(() => import('../pages/HomePage'))
 const RootPage = React.lazy(() => import('../pages/RootPage'))
 const UserInfo = React.lazy(() => import('../pages/UserInfo'))
-const Reward = React.lazy(() => import('../pages/Reward'))
+const Rewards = React.lazy(() => import('../pages/Rewards'))
 const ConfirmEmail = React.lazy(
   () => import('../pages/Authentication/ForgotPass/ConfirmEmail')
 )
@@ -85,7 +85,7 @@ export const router = createBrowserRouter([
             path: ROUTE_PATH.CURRENT_BALANCE,
             element: (
               <Suspense fallback={null}>
-                <Reward />
+                <Rewards />
               </Suspense>
             ),
           },
