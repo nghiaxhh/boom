@@ -104,7 +104,7 @@ function ModalClaimReward({ isOpen, onOk, onCancel }) {
               <div>2.0 Boost</div>
             </div>
           )}
-          {/* <div>Out of 10,000 points distributed</div> */}
+          <div>Out of 10,000 points distributed</div>
         </div>
       }
       footer={
@@ -138,7 +138,7 @@ function ModalClaimReward({ isOpen, onOk, onCancel }) {
                 handleClaimRewards('DAILY', listMission?.daily_points)
               }
             >
-              Claim
+              1000
             </Button>
           </div>
         </div>
@@ -161,7 +161,7 @@ function ModalClaimReward({ isOpen, onOk, onCancel }) {
 
                 <div className="absolute right-4 cursor-pointer">
                   {isCopied ? (
-                    <FaCheck size={22} />
+                    <FaCheck size={22} color="green" />
                   ) : (
                     <GoCopy
                       size={20}
@@ -184,7 +184,7 @@ function ModalClaimReward({ isOpen, onOk, onCancel }) {
             </div>
           </div>
           <div className="flex items-center">
-            <Button>Claim</Button>
+            <Button disabled>1.000.000</Button>
           </div>
         </div>
         <div className="m-5 flex justify-between rounded-[10px] border-[1px] border-solid border-[#0000001A] bg-[#FBFDFF] px-[18px] py-3">

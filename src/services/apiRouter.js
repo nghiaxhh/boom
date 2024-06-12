@@ -14,3 +14,8 @@ export const apiGetRewards = '/api/v1/users/my-rewards'
 
 // Files
 export const apiUploadFile = '/api/v1/files/upload'
+
+// Statistics
+export const apiStatisticsBreakdown = '/api/v1/statistics/breakdown'
+export const apiStatisticsRefferdUsers = '/api/v1/statistics/my-referred-users'
+export const apiStatisticsLeaderboard = '/api/v1/statistics/leaderboard'
