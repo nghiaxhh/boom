@@ -1,40 +1,61 @@
-import React from 'react'
+/* eslint-disable no-unused-vars */
+import React, { useEffect, useState } from 'react'
+import Statistics from '../../../services/Statistics'
+import { LeaderBoardWrapper } from '../styled'
 
-function TopRanking() {
+function TopRanking({ onLoading }) {
+  const [list, setList] = useState({})
+
+  const getLeaderBoard = () => {
+    onLoading(true)
+    Statistics.getLeaderboard()
+      .then((res) => {
+        if (res.isOk) {
+          console.log(res.data)
+          setList(res.data)
+        }
+      })
+      .catch(() => {})
+      .finally(() => onLoading(false))
+  }
+
+  useEffect(() => {
+    getLeaderBoard()
+  }, [])
   return (
-    <div>
+    <LeaderBoardWrapper>
       <table>
-        <tr>
-          <th>Ranking</th>
-          <th>Name</th>
-          <th>Match Points</th>
-          <th>Boosted Point</th>
-          <th>Total</th>
-        </tr>
-
-        <tr>
-          <td>1</td>
-          <td className="text-center">Lucia</td>
-          <td className="text-center">3,000,000</td>
-          <td className="text-center">3,000,000</td>
-          <td className="text-center">6,000,000</td>
-        </tr>
-        <tr>
-          <td>2</td>
-          <td className="text-center">Lucia</td>
-          <td className="text-center">3,000,000</td>
-          <td className="text-center">3,000,000</td>
-          <td className="text-center">6,000,000</td>
-        </tr>
-        <tr>
-          <td>3</td>
-          <td className="text-center">Lucia</td>
-          <td className="text-center">3,000,000</td>
-          <td className="text-center">3,000,000</td>
-          <td className="text-center">6,000,000</td>
-        </tr>
+        <thead>
+          <tr>
+            <th>Ranking</th>
+            <th>Name</th>
+            <th>Match Points</th>
+            <th>Boosted Point</th>
+            <th>Total</th>
+          </tr>
+        </thead>
+        <tbody>
+          {/* <tr>
+            <td className="text-center">{list?.me?.rank}</td>
+            <td className="text-center">{list?.me?.fullname}</td>
+            <td className="text-center">{list?.me?.points}</td>
+            <td className="text-center">{list?.me?.boosted_points}</td>
+            <td className="text-center">{list?.me?.total_points}</td>
+          </tr> */}
+          {list?.leaderboard?.map((item, idx) => {
+            return (
+              <tr key={idx}>
+                <td className="text-center">{item?.rank}</td>
+                <td className="text-center">{item?.fullname}</td>
+                <td className="text-center">{item?.points}</td>
+                <td className="text-center">{item?.boosted_points}</td>
+                <td className="text-center">{item?.total_points}</td>
+              </tr>
+            )
+          })}
+        </tbody>
       </table>
-    </div>
+    </LeaderBoardWrapper>
   )
 }
 

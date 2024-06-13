@@ -25,17 +25,17 @@ function Rewards() {
     {
       label: `Breakdown`,
       key: 1,
-      children: <Breakdown />,
+      children: <Breakdown onLoading={setLoading} />,
     },
     {
       label: `Referral`,
       key: 2,
-      children: <Referral />,
+      children: <Referral onLoading={setLoading} />,
     },
     {
       label: `Top 100`,
       key: 3,
-      children: <TopRanking />,
+      children: <TopRanking onLoading={setLoading} />,
     },
   ]
 
@@ -149,7 +149,7 @@ function Rewards() {
           <Divider />
           <div className="mb-6 flex justify-between border-[1px] border-solid border-[#000000] p-4">
             <div>
-              <div>Referral</div>
+              <div className="text-lg font-semibold">Referral</div>
               <div>Earn 10% of total points from referred user</div>
             </div>
 
