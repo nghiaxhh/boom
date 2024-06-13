@@ -18,17 +18,17 @@
   height: unset;
 }
 
-.ant-btn-default {
+.claim-point {
   position: relative;
 }
 
-.ant-btn-default:not(:disabled):hover {
+.claim-point:not(:disabled):hover {
   transform: scale(1);
   border-color: unset;
 }
 
-.ant-btn-default:hover::before,
-.ant-btn-default:hover::after {
+.claim-point:hover::before,
+.claim-point:hover::after {
   position: absolute;
   content: '';
   width: 150%;
@@ -39,7 +39,7 @@
   background-repeat: no-repeat;
 }
 
-.ant-btn-default::before {
+.claim-point::before {
   top: -70%;
   background-image: radial-gradient(circle, #ffb415 20%, transparent 20%),
     radial-gradient(circle, transparent 20%, #ffb415 20%, transparent 30%),
@@ -109,7 +109,7 @@
   }
 }
 
-.ant-btn-default::after {
+.claim-point::after {
   bottom: -70%;
   background-image: radial-gradient(circle, #ffb415 20%, transparent 20%),
     radial-gradient(circle, #ffb415 20%, transparent 20%),

@@ -133,6 +133,7 @@ function ModalClaimReward({ isOpen, onOk, onCancel }) {
           </div>
           <div className="flex items-center">
             <Button
+              className="claim-point"
               disabled={!isValidDailyClaim}
               onClick={() =>
                 handleClaimRewards('DAILY', listMission?.daily_points)
@@ -184,7 +185,9 @@ function ModalClaimReward({ isOpen, onOk, onCancel }) {
             </div>
           </div>
           <div className="flex items-center">
-            <Button disabled>1.000.000</Button>
+            <Button className="claim-point" disabled>
+              1.000.000
+            </Button>
           </div>
         </div>
         <div className="m-5 flex justify-between rounded-[10px] border-[1px] border-solid border-[#0000001A] bg-[#FBFDFF] px-[18px] py-3">
@@ -197,6 +200,7 @@ function ModalClaimReward({ isOpen, onOk, onCancel }) {
           </div>
           <div className="flex items-center">
             <Button
+              className="claim-point"
               disabled={!listMission?.winning_matches_allowed}
               onClick={() => {
                 handleClaimRewards(
@@ -219,6 +223,7 @@ function ModalClaimReward({ isOpen, onOk, onCancel }) {
           </div>
           <div className="flex items-center">
             <Button
+              className="claim-point"
               disabled={!listMission?.ten_matches_allowed}
               onClick={() =>
                 handleClaimRewards(
@@ -241,6 +246,7 @@ function ModalClaimReward({ isOpen, onOk, onCancel }) {
           </div>
           <div className="flex items-center">
             <Button
+              className="claim-point"
               disabled={!listMission?.twenty_matches_allowed}
               onClick={() =>
                 handleClaimRewards(
