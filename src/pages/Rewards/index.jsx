@@ -114,6 +114,7 @@ function Rewards() {
             <div className="my-4 flex w-full items-center justify-between">
               <div className="flex w-[200px] flex-col items-center gap-2">
                 <Button
+                  className="claim-point"
                   disabled={!isValidDailyClaim}
                   onClick={() =>
                     handleClaimRewards('DAILY', listMission?.daily_points)
