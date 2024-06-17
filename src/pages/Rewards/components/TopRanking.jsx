@@ -37,7 +37,7 @@ function TopRanking({ onLoading }) {
         <tbody>
           <tr>
             <td className="border-b border-black p-2 text-center">
-              {list?.me?.rank}
+              #{list?.me?.rank}
             </td>
             <td className="border-b border-black p-2 text-center">
               {list?.me?.fullname}
@@ -55,7 +55,7 @@ function TopRanking({ onLoading }) {
           {list?.leaderboard?.map((item, idx) => {
             return (
               <tr key={idx}>
-                <td className="p-2 text-center">{item?.rank}</td>
+                <td className="p-2 text-center">#{item?.rank}</td>
                 <td className="p-2 text-center">{item?.fullname}</td>
                 <td className="p-2 text-center">{item?.points}</td>
                 <td className="p-2 text-center">{item?.boosted_points}</td>
