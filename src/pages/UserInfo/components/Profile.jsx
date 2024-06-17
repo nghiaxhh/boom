@@ -7,10 +7,14 @@ import Button from '../../../components/Button'
 import UserServices from '../../../services/UserServices'
 import FileServices from '../../../services/FileServices'
 import { toast } from 'sonner'
+import { useSelector } from 'react-redux'
+import { useQueryMe } from '../../../hook/useQueryMe'
 
 function Profile() {
   const [form] = Form.useForm()
   const fileCoverRef = useRef()
+  const { user } = useSelector((state) => state.common)
+  const { getInfo, loading: loadingQuery } = useQueryMe()
 
   const [previewOpen, setPreviewOpen] = useState(false)
   const [previewImage, setPreviewImage] = useState('')
@@ -43,42 +47,20 @@ function Profile() {
     setFileAvatar(newFileList)
   }
 
-  const getInfo = () => {
-    setLoading(true)
-    UserServices.getMe()
-      .then((res) => {
-        if (res.isOk) {
-          const userInfo = res.data
-
-          form.setFieldsValue({
-            referalID: userInfo.referral_code,
-            fullname: userInfo.fullname,
-            email: userInfo.username,
-            description: userInfo.description,
-          })
-          !!userInfo?.profile_img &&
-            setFileAvatar([
-              {
-                url:
-                  process.env.REACT_APP_API +
-                  '/api/v1/files/download?fileName=' +
-                  userInfo?.profile_img,
-              },
-            ])
-          !!userInfo?.cover_img &&
-            setLinkImg(
-              process.env.REACT_APP_API +
-                '/api/v1/files/download?fileName=' +
-                userInfo?.cover_img
-            )
-        }
-      })
-      .catch(() => {})
-      .finally(() => setLoading(false))
-  }
-
   useEffect(() => {
-    getInfo()
+    form.setFieldsValue({
+      referalID: user.referalID,
+      fullname: user.fullname,
+      email: user.email,
+      description: user.description,
+    })
+    !!user.avatarUrl &&
+      setFileAvatar([
+        {
+          url: user.avatarUrl,
+        },
+      ])
+    !!user.coverImg && setLinkImg(user.coverImg)
   }, [])
 
   const handleSubmit = async () => {
@@ -128,7 +110,7 @@ function Profile() {
   }
 
   return (
-    <Spin spinning={loading}>
+    <Spin spinning={loading || loadingQuery}>
       <div className="border-[1px] border-solid border-[#d9d9d9]">
         <div className="flex justify-between px-[26px] py-7">
           <div className="font-semibold">My Profile</div>

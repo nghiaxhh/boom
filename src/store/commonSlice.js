@@ -6,6 +6,7 @@ const initialState = {
   listProject: [],
   listVendor: [],
   listEmployee: [],
+  user: {},
 }
 
 export const commonSlice = createSlice({
@@ -27,6 +28,9 @@ export const commonSlice = createSlice({
     getListEmployee: (state, actions) => {
       state.listEmployee = actions.payload
     },
+    changeInfoUser: (state, actions) => {
+      state.user = actions.payload
+    },
   },
 })
 
@@ -37,6 +41,7 @@ export const {
   getListVendor,
   getListProject,
   getListEmployee,
+  changeInfoUser,
 } = commonSlice.actions
 
 export default commonSlice.reducer
