@@ -94,7 +94,8 @@ const SignUpForm = () => {
                 rules={[
                   {
                     required: true,
-                    message: 'Thông tin không được để trống',
+                    whitespace: true,
+                    message: 'This field is required!',
                   },
                 ]}
               >
@@ -108,11 +109,12 @@ const SignUpForm = () => {
                 rules={[
                   {
                     required: true,
-                    message: 'Thông tin không được để trống',
+                    message: 'This field is required!',
                   },
                   {
                     pattern: isValidEmail(),
-                    message: 'Email không đúng định dạng',
+                    whitespace: true,
+                    message: 'Email is not a valid email!',
                   },
                 ]}
               >
@@ -126,7 +128,8 @@ const SignUpForm = () => {
                 rules={[
                   {
                     required: true,
-                    message: 'Thông tin không được để trống',
+                    whitespace: true,
+                    message: 'This field is required!',
                   },
                 ]}
               >
@@ -140,7 +143,8 @@ const SignUpForm = () => {
                 rules={[
                   {
                     required: true,
-                    message: 'Thông tin không được để trống',
+                    whitespace: true,
+                    message: 'This field is required!',
                   },
                 ]}
               >
@@ -154,7 +158,8 @@ const SignUpForm = () => {
                 rules={[
                   {
                     required: true,
-                    message: 'Thông tin không được để trống',
+                    whitespace: true,
+                    message: 'This field is required!',
                   },
                   ({ getFieldValue }) => ({
                     validator(_, value) {

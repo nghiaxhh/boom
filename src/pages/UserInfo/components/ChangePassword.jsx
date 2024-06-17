@@ -54,7 +54,7 @@ const ChangePassword = () => {
                   rules={[
                     {
                       required: true,
-                      message: 'required',
+                      message: 'This field is required!',
                     },
                   ]}
                 >
@@ -67,7 +67,7 @@ const ChangePassword = () => {
                   rules={[
                     {
                       required: true,
-                      message: 'required',
+                      message: 'This field is required!',
                     },
                   ]}
                 >
@@ -80,14 +80,16 @@ const ChangePassword = () => {
                   rules={[
                     {
                       required: true,
-                      message: 'required',
+                      message: 'This field is required!',
                     },
                     ({ getFieldValue }) => ({
                       validator(_, value) {
                         if (!value || getFieldValue('newPassword') === value) {
                           return Promise.resolve()
                         }
-                        return Promise.reject(new Error('Mật khẩu không khớp'))
+                        return Promise.reject(
+                          new Error('Password is not valid!')
+                        )
                       },
                     }),
                   ]}

@@ -42,10 +42,10 @@ function Navbar() {
               {user.curr_points}
             </div>
             <div
-              className="flex cursor-pointer items-center gap-[25px]"
+              className="flex h-12 cursor-pointer items-center gap-[25px]"
               onClick={() => navigate(ROUTE_PATH.USER_INFO)}
             >
-              <img src={'./image/avatar.png'} alt="" />
+              <img src={user.avatarUrl ?? './image/avatar.png'} alt="" />
             </div>
           </div>
         </div>
