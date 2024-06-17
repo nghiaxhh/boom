@@ -79,7 +79,7 @@ export default function ResetPassword() {
                     rules={[
                       {
                         required: true,
-                        message: 'Thông tin không được để trống',
+                        message: 'This field is required!',
                       },
                     ]}
                   >
@@ -93,7 +93,7 @@ export default function ResetPassword() {
                     rules={[
                       {
                         required: true,
-                        message: 'Thông tin không được để trống',
+                        message: 'This field is required!',
                       },
                       ({ getFieldValue }) => ({
                         validator(_, value) {

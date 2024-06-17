@@ -93,11 +93,11 @@ const ConfirmEmail = () => {
                 rules={[
                   {
                     required: true,
-                    message: 'Thông tin không được để trống',
+                    message: 'This field is required!',
                   },
                   {
                     pattern: isValidEmail(),
-                    message: 'Email không đúng định dạng',
+                    message: 'Email is not a valid email!',
                   },
                 ]}
               >

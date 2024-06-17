@@ -112,44 +112,50 @@ function Rewards() {
     <RewardsWrapper>
       <Spin spinning={loading || loadingQuery}>
         <LayoutCommon>
-          <div className="flex flex-col items-center">
-            <div className="text-[32px]">Current Balance</div>
-            <div className="my-4 flex w-full items-center justify-between">
-              <div className="flex w-[150px] flex-col items-center gap-2">
-                <Button
-                  className="claim-point"
-                  disabled={!isValidDailyClaim}
-                  onClick={() =>
-                    handleClaimRewards('DAILY', listMission?.daily_points)
-                  }
-                >
-                  Claim
-                </Button>
+          <div className="flex items-center justify-center text-[32px] font-bold">
+            Current Balance
+          </div>
+          <div className="relative w-full">
+            <div className="flex flex-col items-center">
+              <div className="my-4 flex w-full items-center justify-between">
+                <div className="flex w-[200px] flex-col items-center justify-center gap-2">
+                  <Button
+                    className="claim-point"
+                    disabled={!isValidDailyClaim}
+                    onClick={() =>
+                      handleClaimRewards('DAILY', listMission?.daily_points)
+                    }
+                  >
+                    Claim
+                  </Button>
 
-                <div className="mb-2 text-xs text-[#FF9C09]">
-                  {`You can claim ${isValidDailyClaim ? 'every 6 hours' : `after ${timeCountdown.join(':')}`} `}
-                </div>
-              </div>
-              <div className="flex flex-col items-center gap-2">
-                <div className="mt-2 flex items-center gap-1">
-                  <img
-                    src="./image/circle_star.png"
-                    alt=""
-                    className="h-[18px]"
-                  />
-                  <div className="text-lg font-bold">{listMission?.point}</div>
-                </div>
-                {listMission?.boosted && (
-                  <div className="flex gap-1">
-                    <IconSvg name="icon-flash-fill" />
-                    <div>2.0x Boost</div>
+                  <div className="text-xs text-[#FF9C09]">
+                    {`You can claim ${isValidDailyClaim ? 'every 6 hours' : `after ${timeCountdown.join(':')}`} `}
                   </div>
-                )}
-                <div>Out of 10,000 points distributed</div>
+                </div>
+
+                <div>
+                  <a href="/">How to get boosted?</a>
+                </div>
               </div>
-              <div>
-                <a href="/">How to get boosted?</a>
+            </div>
+
+            <div className="absolute left-1/2 top-1/2 flex -translate-x-1/2 -translate-y-1/2 flex-col items-center justify-center gap-2">
+              <div className="flex items-center gap-1">
+                <img
+                  src="./image/circle_star.png"
+                  alt=""
+                  className="h-[18px]"
+                />
+                <div className="text-lg font-bold">{listMission?.point}</div>
               </div>
+              {listMission?.boosted && (
+                <div className="flex gap-1">
+                  <IconSvg name="icon-flash-fill" />
+                  <div>2.0x Boost</div>
+                </div>
+              )}
+              <div className="italic">Out of 10,000 points distributed</div>
             </div>
           </div>
           <Divider />
@@ -189,7 +195,7 @@ function Rewards() {
                     '_blank'
                   )
                 }
-                className="flex cursor-pointer items-center gap-1 rounded-lg border p-2"
+                className="flex cursor-pointer items-center gap-1 rounded-lg border px-4 py-2"
               >
                 Share on
                 <IconSvg name="icon-twitter" />

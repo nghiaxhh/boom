@@ -189,7 +189,7 @@ function ModalClaimReward({ isOpen, onOk, onCancel }) {
                     '_blank'
                   )
                 }
-                className="flex cursor-pointer items-center gap-1 rounded-lg border p-2"
+                className="flex cursor-pointer items-center gap-1 rounded-lg border px-4 py-2"
               >
                 Share on
                 <IconSvg name="icon-twitter" />
