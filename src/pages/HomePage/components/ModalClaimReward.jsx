@@ -9,10 +9,12 @@ import IconSvg from '../../../components/SvgIcon'
 import { ROUTE_PATH } from '../../../routes/route.constant'
 import UserServices from '../../../services/UserServices'
 import dayjs from 'dayjs'
+import { useQueryMe } from '../../../hook/useQueryMe'
 
 function ModalClaimReward({ isOpen, onOk, onCancel }) {
   const navigate = useNavigate()
   const ref = useRef()
+  const { getInfo, loading: loadingQuery } = useQueryMe()
   const [loading, setLoading] = useState(false)
   const [isCopied, setIsCopied] = useState(false)
   const [listMission, setListMission] = useState({})
@@ -80,6 +82,7 @@ function ModalClaimReward({ isOpen, onOk, onCancel }) {
       .then((res) => {
         if (res.isOk) {
           getClaimRewards()
+          getInfo()
         }
       })
       .catch(() => {})
@@ -120,7 +123,7 @@ function ModalClaimReward({ isOpen, onOk, onCancel }) {
         </div>
       }
     >
-      <Spin spinning={loading}>
+      <Spin spinning={loading || loadingQuery}>
         <div className="m-5 mt-0 flex justify-between rounded-[10px] border-[1px] border-solid border-[#0000001A] bg-[#FBFDFF] px-[18px] py-3">
           <div>
             <div className="mb-3 text-lg font-semibold">

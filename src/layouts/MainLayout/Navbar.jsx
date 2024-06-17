@@ -3,10 +3,13 @@ import { LayoutCommon } from '../styled'
 import { useNavigate } from 'react-router-dom'
 import { ROUTE_PATH } from '../../routes/route.constant'
 import ModalClaimReward from '../../pages/HomePage/components/ModalClaimReward'
+import { useSelector } from 'react-redux'
 
 function Navbar() {
   const navigate = useNavigate()
   const [isOpenModal, setIsOpenModal] = useState(false)
+  const { user } = useSelector((state) => state.common)
+
   return (
     <div className="z-[99] h-[70px] bg-white leading-[70px] shadow-[0_10px_20px_0_#0000000D]">
       <LayoutCommon>
@@ -36,7 +39,7 @@ function Navbar() {
               <div>
                 <img src="./image/circle_star.png" alt="" />
               </div>
-              100
+              {user.curr_points}
             </div>
             <div
               className="flex cursor-pointer items-center gap-[25px]"

@@ -11,9 +11,11 @@ import Breakdown from './components/Breakdown'
 import Referral from './components/Referral'
 import TopRanking from './components/TopRanking'
 import { RewardsWrapper } from './styled'
+import { useQueryMe } from '../../hook/useQueryMe'
 
 function Rewards() {
   const ref = useRef()
+  const { getInfo, loading: loadingQuery } = useQueryMe()
   const [loading, setLoading] = useState(false)
   const [isCopied, setIsCopied] = useState(false)
   const [listMission, setListMission] = useState({})
@@ -85,6 +87,7 @@ function Rewards() {
       .then((res) => {
         if (res.isOk) {
           getClaimRewards()
+          getInfo()
         }
       })
       .catch(() => {})
@@ -107,7 +110,7 @@ function Rewards() {
 
   return (
     <RewardsWrapper>
-      <Spin spinning={loading}>
+      <Spin spinning={loading || loadingQuery}>
         <LayoutCommon>
           <div className="flex flex-col items-center">
             <div className="text-[32px]">Current Balance</div>
