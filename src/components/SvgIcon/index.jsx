@@ -9,6 +9,7 @@ export const ListIcon = [
   'icon-discord',
   'icon-gmail',
   'icon-flash-fill',
+  'icon-twitter',
 ]
 
 export default function IconSvg(props) {
@@ -16,6 +17,35 @@ export default function IconSvg(props) {
   let iconElement
 
   switch (name) {
+    case 'icon-twitter':
+      iconElement = (
+        <svg
+          width="24"
+          height="24"
+          viewBox="0 0 24 24"
+          fill="none"
+          xmlns="http://www.w3.org/2000/svg"
+        >
+          <path
+            d="M2.86718 3L9.73633 12.8184L2.73438 21H5.38085L10.9199 14.5098L15.4609 21H21.3711L14.1738 10.6973L20.7441 3H18.1387L12.9961 9.00977L8.79883 3H2.86718Z"
+            fill="url(#paint0_linear_82_287)"
+          />
+          <defs>
+            <linearGradient
+              id="paint0_linear_82_287"
+              x1="1.97368"
+              y1="10.2468"
+              x2="20.5364"
+              y2="16.0654"
+              gradientUnits="userSpaceOnUse"
+            >
+              <stop stopColor="#FF9C09" />
+              <stop offset="0.51" stopColor="#FF7D35" />
+            </linearGradient>
+          </defs>
+        </svg>
+      )
+      break
     case 'icon-flash-fill':
       iconElement = (
         <svg
