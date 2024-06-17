@@ -115,7 +115,7 @@ function Rewards() {
           <div className="flex flex-col items-center">
             <div className="text-[32px]">Current Balance</div>
             <div className="my-4 flex w-full items-center justify-between">
-              <div className="flex w-[200px] flex-col items-center gap-2">
+              <div className="flex w-[150px] flex-col items-center gap-2">
                 <Button
                   className="claim-point"
                   disabled={!isValidDailyClaim}
@@ -135,9 +135,9 @@ function Rewards() {
                   <img
                     src="./image/circle_star.png"
                     alt=""
-                    className="h-[14px]"
+                    className="h-[18px]"
                   />
-                  <div>{listMission?.point}</div>
+                  <div className="text-lg font-bold">{listMission?.point}</div>
                 </div>
                 {listMission?.boosted && (
                   <div className="flex gap-1">
@@ -180,9 +180,18 @@ function Rewards() {
                   )}
                 </div>
               </div>
-              <IconSvg name="icon-x" />
-              {/* <IconSvg name="icon-discord"  />
-              <IconSvg name="icon-gmail" /> */}
+              <div
+                onClick={() =>
+                  window.open(
+                    `https://x.com/intent/tweet?text=${listMission?.referral_code}`,
+                    '_blank'
+                  )
+                }
+                className="flex cursor-pointer items-center gap-1 rounded-lg border p-2"
+              >
+                Share on
+                <IconSvg name="icon-twitter" />
+              </div>
             </div>
           </div>
           <Tabs type="card" items={items} />

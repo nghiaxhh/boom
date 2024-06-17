@@ -35,21 +35,31 @@ function TopRanking({ onLoading }) {
           </tr>
         </thead>
         <tbody>
-          {/* <tr>
-            <td className="text-center">{list?.me?.rank}</td>
-            <td className="text-center">{list?.me?.fullname}</td>
-            <td className="text-center">{list?.me?.points}</td>
-            <td className="text-center">{list?.me?.boosted_points}</td>
-            <td className="text-center">{list?.me?.total_points}</td>
-          </tr> */}
+          <tr>
+            <td className="border-b border-black p-2 text-center">
+              {list?.me?.rank}
+            </td>
+            <td className="border-b border-black p-2 text-center">
+              {list?.me?.fullname}
+            </td>
+            <td className="border-b border-black p-2 text-center">
+              {list?.me?.points}
+            </td>
+            <td className="border-b border-black p-2 text-center">
+              {list?.me?.boosted_points}
+            </td>
+            <td className="border-b border-black p-2  text-center">
+              {list?.me?.total_points}
+            </td>
+          </tr>
           {list?.leaderboard?.map((item, idx) => {
             return (
               <tr key={idx}>
-                <td className="text-center">{item?.rank}</td>
-                <td className="text-center">{item?.fullname}</td>
-                <td className="text-center">{item?.points}</td>
-                <td className="text-center">{item?.boosted_points}</td>
-                <td className="text-center">{item?.total_points}</td>
+                <td className="p-2 text-center">{item?.rank}</td>
+                <td className="p-2 text-center">{item?.fullname}</td>
+                <td className="p-2 text-center">{item?.points}</td>
+                <td className="p-2 text-center">{item?.boosted_points}</td>
+                <td className="p-2 text-center">{item?.total_points}</td>
               </tr>
             )
           })}

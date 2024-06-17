@@ -182,9 +182,18 @@ function ModalClaimReward({ isOpen, onOk, onCancel }) {
                   )}
                 </div>
               </div>
-              <IconSvg name="icon-x" />
-              {/* <IconSvg name="icon-discord"  />
-              <IconSvg name="icon-gmail" /> */}
+              <div
+                onClick={() =>
+                  window.open(
+                    `https://x.com/intent/tweet?text=${listMission?.referral_code}`,
+                    '_blank'
+                  )
+                }
+                className="flex cursor-pointer items-center gap-1 rounded-lg border p-2"
+              >
+                Share on
+                <IconSvg name="icon-twitter" />
+              </div>
             </div>
           </div>
           <div className="flex items-center">

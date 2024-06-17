@@ -33,7 +33,7 @@ function Navbar() {
               <div className="cursor-pointer">Marketplace</div>
             </div>
             <div
-              className="flex cursor-pointer items-center gap-2"
+              className="flex cursor-pointer items-center gap-2 font-bold"
               onClick={() => setIsOpenModal(true)}
             >
               <div>
