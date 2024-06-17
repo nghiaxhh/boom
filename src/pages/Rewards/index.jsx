@@ -147,7 +147,9 @@ function Rewards() {
                 )}
                 <div>Out of 10,000 points distributed</div>
               </div>
-              <div>How to get boosted?</div>
+              <div>
+                <a href="/">How to get boosted?</a>
+              </div>
             </div>
           </div>
           <Divider />
