@@ -109,6 +109,8 @@ const ConfirmEmail = () => {
               Submit
             </Button>
             <Button
+              bgColor="white"
+              color="#FF9C09"
               className="mb-6 w-full"
               onClick={() => navigate(ROUTE_PATH.LOGIN)}
             >

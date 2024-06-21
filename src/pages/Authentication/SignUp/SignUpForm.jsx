@@ -51,10 +51,10 @@ const SignUpForm = () => {
           web3_wallet_address: userInfo.address_wallet,
           message: userInfo.message,
           signature: userInfo.signature,
-          username: values.email,
+          username: values.email.trim(),
           password: values.password,
-          fullname: values.fullName,
-          referred_code: values.referalID,
+          fullname: values.fullName.trim(),
+          referred_code: values.referalID.trim(),
         }
         setLoading(true)
         const res = await AuthServices.signUp(body)
@@ -127,9 +127,8 @@ const SignUpForm = () => {
                 label="Referral ID"
                 rules={[
                   {
-                    required: true,
                     whitespace: true,
-                    message: 'This field is required!',
+                    message: 'Do not enter whitespace characters!',
                   },
                 ]}
               >

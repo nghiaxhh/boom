@@ -1,12 +1,12 @@
-import { LogoutOutlined, UserOutlined } from '@ant-design/icons'
 import { Col, Divider, Row, Spin } from 'antd'
 import React, { useState } from 'react'
-import { LayoutCommon } from '../../layouts/styled'
-import { UserInfoWrapper } from './styled'
-import Profile from './components/Profile'
-import ChangePassword from './components/ChangePassword'
-import AuthServices from '../../services/AuthServices'
 import { useNavigate } from 'react-router-dom'
+import IconSvg from '../../components/IconSvg'
+import { LayoutCommon } from '../../layouts/styled'
+import AuthServices from '../../services/AuthServices'
+import ChangePassword from './components/ChangePassword'
+import Profile from './components/Profile'
+import { UserInfoWrapper } from './styled'
 
 function UserInfo() {
   const navigate = useNavigate()
@@ -38,7 +38,7 @@ function UserInfo() {
             <Col span={6}>
               <div className="rounded-lg bg-[#F8F8F8] px-4">
                 <div className="flex h-12 gap-2">
-                  <UserOutlined />
+                  <IconSvg name="icon-user" />
                   My Account
                 </div>
                 <Divider />
@@ -59,10 +59,10 @@ function UserInfo() {
 
                 <Divider />
                 <div
-                  className="flex h-12 cursor-pointer gap-2 "
+                  className="flex h-12 cursor-pointer gap-2 text-[#FF4D4F]"
                   onClick={handleLogout}
                 >
-                  <LogoutOutlined />
+                  <IconSvg name="icon-logout" />
                   Log out
                 </div>
               </div>
