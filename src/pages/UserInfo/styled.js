@@ -11,8 +11,4 @@ export const UserInfoWrapper = styled.div`
     display: flex;
     align-items: center;
   }
-
-  .ant-upload {
-    width: 100%;
-  }
 `

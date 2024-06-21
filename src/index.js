@@ -22,6 +22,12 @@ root.render(
           borderRadius: 6,
         },
         hashed: false,
+        components: {
+          Button: {
+            // colorBorder: '#FF9C09',
+            colorPrimaryHover: 'FF9C09',
+          },
+        },
       }}
     >
       <MetaMaskProvider

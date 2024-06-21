@@ -42,7 +42,7 @@ const ChangePassword = () => {
           <Form
             form={form}
             colon={false}
-            labelCol={{ span: 6 }}
+            labelCol={{ span: 7 }}
             labelAlign="left"
             requiredMark={false}
           >

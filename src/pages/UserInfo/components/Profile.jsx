@@ -1,7 +1,6 @@
-/* eslint-disable no-unused-vars */
 import { Col, Divider, Form, Image, Input, Row, Spin, Upload } from 'antd'
 import React, { useEffect, useRef, useState } from 'react'
-import IconSvg from '../../../components/SvgIcon'
+import IconSvg from '../../../components/IconSvg'
 import { getBase64 } from '../../../helper/utils'
 import Button from '../../../components/Button'
 import UserServices from '../../../services/UserServices'
@@ -9,6 +8,8 @@ import FileServices from '../../../services/FileServices'
 import { toast } from 'sonner'
 import { useSelector } from 'react-redux'
 import { useQueryMe } from '../../../hook/useQueryMe'
+import { FaCheck } from 'react-icons/fa'
+import { GoCopy } from 'react-icons/go'
 
 function Profile() {
   const [form] = Form.useForm()
@@ -18,12 +19,11 @@ function Profile() {
 
   const [previewOpen, setPreviewOpen] = useState(false)
   const [previewImage, setPreviewImage] = useState('')
+  const [isCopied, setIsCopied] = useState(false)
   const [changeAvatar, setChangeAvatar] = useState(false)
   const [changeCoverImg, setChangeCoverImg] = useState(false)
   const [fileCover, setFileCover] = useState({})
-  const [linkImg, setLinkImg] = useState(
-    process.env.PUBLIC_URL + '/image/cover_image.png'
-  )
+  const [linkImg, setLinkImg] = useState('')
   const [fileAvatar, setFileAvatar] = useState([])
   const [loading, setLoading] = useState(false)
   const [disabled, setDisabled] = useState(true)
@@ -43,6 +43,9 @@ function Profile() {
   }
 
   const onChangeFileAvatar = ({ fileList: newFileList }) => {
+    if (newFileList[0]?.size > 1024 * 5 * 1024) {
+      return toast.error('File size larger than 5MB')
+    }
     setChangeAvatar(true)
     setFileAvatar(newFileList)
   }
@@ -60,9 +63,14 @@ function Profile() {
           url: user.avatarUrl,
         },
       ])
-    !!user.coverImg && setLinkImg(user.coverImg)
-  }, [])
+    setLinkImg(
+      user.coverImg
+        ? user.coverImg
+        : process.env.PUBLIC_URL + '/image/cover_image.png'
+    )
+  }, [user])
 
+  // handle submit form
   const handleSubmit = async () => {
     const values = form.getFieldsValue()
 
@@ -95,6 +103,7 @@ function Profile() {
     if (res?.isOk) {
       toast.success('Success')
       getInfo()
+      setDisabled(true)
     }
     setLoading(false)
   }
@@ -103,7 +112,7 @@ function Profile() {
     const uploadedFile = fileCoverRef.current.files[0]
     const cachedURL = URL.createObjectURL(uploadedFile)
     if (uploadedFile?.size > 1024 * 5 * 1024)
-      return toast.error('Kích thước ảnh quá lớn')
+      return toast.error('File size larger than 5MB')
     setChangeCoverImg(true)
     setLinkImg(cachedURL)
     setFileCover(uploadedFile)
@@ -139,7 +148,7 @@ function Profile() {
                 ref={fileCoverRef}
                 type="file"
                 id="avatar"
-                accept="image/*"
+                accept="image/*.png,.jpg"
                 onChange={handleChangeCoverPhoto}
               />
             </label>
@@ -153,13 +162,36 @@ function Profile() {
             <Row>
               <Col span={16}>
                 <Form.Item name="referalID" label="Referal ID">
-                  <Input disabled={disabled} />
+                  <Input
+                    readOnly
+                    suffix={
+                      isCopied ? (
+                        <FaCheck
+                          className="cursor-pointer"
+                          size={22}
+                          color="green"
+                        />
+                      ) : (
+                        <GoCopy
+                          size={20}
+                          className="cursor-pointer"
+                          onClick={() => {
+                            setIsCopied(true)
+                            navigator.clipboard.writeText(user.referalID)
+                            setTimeout(() => {
+                              setIsCopied(false)
+                            }, 1500)
+                          }}
+                        />
+                      )
+                    }
+                  />
                 </Form.Item>
                 <Form.Item name="fullname" label="Game name">
                   <Input disabled={disabled} />
                 </Form.Item>
                 <Form.Item name="email" label="Email">
-                  <Input disabled={disabled} />
+                  <Input readOnly />
                 </Form.Item>
                 <Form.Item name="description" label="Description">
                   <Input.TextArea disabled={disabled} />
@@ -179,8 +211,8 @@ function Profile() {
                     fileList={fileAvatar}
                     onChange={onChangeFileAvatar}
                     onPreview={handlePreview}
-                    beforeUpload={(file) => {
-                      setFileAvatar([...fileAvatar, file])
+                    beforeUpload={() => {
+                      // setFileAvatar([...fileAvatar, file])
                       return false
                     }}
                   >

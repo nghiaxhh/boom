@@ -4,7 +4,6 @@ import React, { useEffect, useRef, useState } from 'react'
 import { FaCheck } from 'react-icons/fa6'
 import { GoCopy } from 'react-icons/go'
 import Button from '../../components/Button'
-import IconSvg from '../../components/SvgIcon'
 import { LayoutCommon } from '../../layouts/styled'
 import UserServices from '../../services/UserServices'
 import Breakdown from './components/Breakdown'
@@ -12,6 +11,7 @@ import Referral from './components/Referral'
 import TopRanking from './components/TopRanking'
 import { RewardsWrapper } from './styled'
 import { useQueryMe } from '../../hook/useQueryMe'
+import IconSvg from '../../components/IconSvg'
 
 function Rewards() {
   const ref = useRef()
