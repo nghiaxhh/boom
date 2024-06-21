@@ -220,8 +220,8 @@ function Profile() {
                   </Upload>
                 </Form.Item>
 
-                {fileAvatar.length < 1 && <div>Maximum capacity 5 MB</div>}
-                {fileAvatar.length < 1 && <div>Format: .JPEG, .PNG</div>}
+                <div>Maximum capacity 5 MB</div>
+                <div>Format: .JPG, .JPEG, .PNG</div>
               </Col>
             </Row>
           </Form>
