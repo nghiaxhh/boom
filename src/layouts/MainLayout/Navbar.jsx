@@ -45,7 +45,7 @@ function Navbar() {
               className="flex h-12 cursor-pointer items-center gap-[25px]"
               onClick={() => navigate(ROUTE_PATH.USER_INFO)}
             >
-              <img className="rounded-full" src={user.avatarUrl} alt="" />
+              <img src={user.avatarUrl} alt="" className="rounded-full" />
             </div>
           </div>
         </div>

@@ -16,7 +16,6 @@ function MainLayout() {
   const { getInfo, loading: loadingQuery } = useQueryMe()
 
   useEffect(() => {
-    console.log('1')
     getInfo()
     if (!isLogin || timeExpiredAccessToken * 1000 < Date.now()) {
       localStorage.clear()

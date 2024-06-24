@@ -153,54 +153,86 @@ function Profile() {
               />
             </label>
           </div>
-          <Form
-            form={form}
-            colon={false}
-            labelCol={{ span: 6 }}
-            labelAlign="left"
-          >
+          <Form form={form} labelCol={{ span: 6 }} labelAlign="left">
             <Row>
               <Col span={16}>
                 <Form.Item name="referalID" label="Referal ID">
-                  <Input
-                    readOnly
-                    suffix={
-                      isCopied ? (
-                        <FaCheck
-                          className="cursor-pointer"
-                          size={22}
-                          color="green"
-                        />
-                      ) : (
-                        <GoCopy
-                          size={20}
-                          className="cursor-pointer"
-                          onClick={() => {
-                            setIsCopied(true)
-                            navigator.clipboard.writeText(user.referalID)
-                            setTimeout(() => {
-                              setIsCopied(false)
-                            }, 1500)
-                          }}
-                        />
-                      )
-                    }
-                  />
+                  {disabled ? (
+                    <div className="relative w-[200px]">
+                      {user?.referalID}
+
+                      <div className="absolute right-4 top-1/2 -translate-y-1/2 cursor-pointer">
+                        {isCopied ? (
+                          <FaCheck size={22} color="green" />
+                        ) : (
+                          <GoCopy
+                            size={20}
+                            onClick={() => {
+                              setIsCopied(true)
+                              navigator.clipboard.writeText(user?.referalID)
+                              setTimeout(() => {
+                                setIsCopied(false)
+                              }, 1500)
+                            }}
+                          />
+                        )}
+                      </div>
+                    </div>
+                  ) : (
+                    <Input
+                      disabled
+                      // suffix={
+                      //   isCopied ? (
+                      //     <FaCheck
+                      //       className="cursor-pointer"
+                      //       size={22}
+                      //       color="green"
+                      //     />
+                      //   ) : (
+                      //     <GoCopy
+                      //       size={20}
+                      //       className="cursor-pointer"
+                      //       onClick={() => {
+                      //         setIsCopied(true)
+                      //         navigator.clipboard.writeText(user.referalID)
+                      //         setTimeout(() => {
+                      //           setIsCopied(false)
+                      //         }, 1500)
+                      //       }}
+                      //     />
+                      //   )
+                      // }
+                    />
+                  )}
                 </Form.Item>
                 <Form.Item name="fullname" label="Game name">
-                  <Input disabled={disabled} />
+                  {disabled ? (
+                    <div className="relative">{user?.fullname}</div>
+                  ) : (
+                    <Input />
+                  )}
                 </Form.Item>
                 <Form.Item name="email" label="Email">
-                  <Input readOnly />
+                  {disabled ? (
+                    <div className="relative">{user?.email}</div>
+                  ) : (
+                    <Input disabled />
+                  )}
                 </Form.Item>
                 <Form.Item name="description" label="Description">
-                  <Input.TextArea disabled={disabled} />
+                  {disabled ? (
+                    <div className="relative">{user?.description}</div>
+                  ) : (
+                    <Input.TextArea />
+                  )}
                 </Form.Item>
-                <Form.Item label=" ">
+                <Row style={{ marginBottom: 25 }}>
+                  <Col span={6} />
+
                   <Button disabled={disabled} onClick={handleSubmit}>
                     Save
                   </Button>
-                </Form.Item>
+                </Row>
               </Col>
               <Col span={8} className="flex flex-col justify-center">
                 <Form.Item name="avatar" label="">
