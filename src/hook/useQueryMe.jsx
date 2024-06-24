@@ -21,13 +21,12 @@ export const useQueryMe = () => {
               fullname: userInfo.fullname,
               email: userInfo.username,
               description: userInfo.description,
-
-              ...(!!userInfo?.profile_img && {
-                avatarUrl:
-                  process.env.REACT_APP_API +
+              avatarUrl: userInfo?.profile_img
+                ? process.env.REACT_APP_API +
                   '/api/v1/files/download?fileName=' +
-                  userInfo?.profile_img,
-              }),
+                  userInfo?.profile_img
+                : './image/avatar.png',
+
               ...(!!userInfo?.cover_img && {
                 coverImg:
                   process.env.REACT_APP_API +
