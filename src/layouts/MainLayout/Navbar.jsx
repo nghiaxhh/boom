@@ -28,9 +28,21 @@ function Navbar() {
           </div>
           <div className="flex items-center gap-[60px]">
             <div className="flex items-center gap-6">
-              <div className="cursor-pointer">Game</div>
+              <div
+                className="cursor-pointer"
+                onClick={() => window.open('https://boomarena.xyz/game.html')}
+              >
+                Game
+              </div>
 
-              <div className="cursor-pointer">Marketplace</div>
+              <div
+                className="cursor-pointer"
+                onClick={() =>
+                  window.open('https://boomarena.xyz/coming-soon.html')
+                }
+              >
+                Marketplace
+              </div>
             </div>
             <div
               className="flex cursor-pointer items-center gap-2 font-bold"
