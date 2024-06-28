@@ -1,14 +1,13 @@
-/* eslint-disable no-unused-vars */
+import { useSDK } from '@metamask/sdk-react'
 import { Checkbox, Col, Form, Input, Row, Spin } from 'antd'
+import Button from 'components/Button'
 import React, { useState } from 'react'
 import { useNavigate } from 'react-router-dom'
-import Button from '../../../components/Button'
-import { SignUpFormWrapper } from './styled'
-import { ROUTE_PATH } from '../../../routes/route.constant'
-import AuthServices from './../../../services/AuthServices'
+import { ROUTE_PATH } from 'routes/route.constant'
+import AuthServices from 'services/AuthServices'
 import { toast } from 'sonner'
 import { isValidEmail } from '../../../helper/utils'
-import { useSDK } from '@metamask/sdk-react'
+import { SignUpFormWrapper } from './styled'
 
 const SignUpForm = () => {
   const [form] = Form.useForm()
@@ -19,54 +18,53 @@ const SignUpForm = () => {
   const message = 'Login with Boom'
 
   const handleConnectMetamask = async () => {
-    sdk?.disconnect()
-    sdk?.terminate()
-    const userInfo = await sdk
-      ?.connect()
-      .then(async (accounts) => {
-        let signature = await sdk.getProvider().request({
-          method: 'personal_sign',
-          params: [accounts[0], message],
-        })
-
-        let dataUser = {
-          address_wallet: accounts[0],
-          signature: signature,
-          message: message,
-        }
-
-        return dataUser
+    try {
+      sdk?.terminate()
+      const accounts = await sdk?.connect()
+      let signature = await sdk.getProvider().request({
+        method: 'personal_sign',
+        params: [accounts[0], message],
       })
-      .catch(() => {})
-    return userInfo
+
+      return {
+        address_wallet: accounts[0],
+        signature: signature,
+        message: message,
+      }
+    } catch (err) {
+      console.warn('failed to connect..', err)
+    }
   }
 
   const handleSubmitForm = () => {
     form
-      .validateFields()
+      .validateFields({
+        validateOnly: true,
+      })
       .then(async (values) => {
+        setLoading(true)
         const userInfo = await handleConnectMetamask()
-
+        console.log(userInfo)
         const body = {
           web3_wallet_address: userInfo.address_wallet,
           message: userInfo.message,
           signature: userInfo.signature,
-          username: values.email.trim(),
+          username: values.email?.trim(),
           password: values.password,
-          fullname: values.fullName.trim(),
-          referred_code: values.referalID.trim(),
+          fullname: values.fullName?.trim(),
+          referred_code: values.referalID?.trim(),
         }
-        setLoading(true)
         const res = await AuthServices.signUp(body)
 
         if (res.isOk) {
           toast.success('Success')
           navigate(ROUTE_PATH.LOGIN)
         }
-
         setLoading(false)
       })
-      .catch(() => {})
+      .catch((e) => {
+        console.log(e)
+      })
   }
 
   return (
@@ -84,6 +82,7 @@ const SignUpForm = () => {
           layout="vertical"
           requiredMark={false}
           autoComplete="off"
+          name="validateOnly"
           // onValuesChange={(changeValue) => console.log(changeValue)}
         >
           <Row>
@@ -191,7 +190,7 @@ const SignUpForm = () => {
           </Row>
         </Form>
         <Button
-          disabled={!!isDisableButton}
+          disabled={isDisableButton}
           className="mb-6 w-full"
           onClick={handleSubmitForm}
         >
