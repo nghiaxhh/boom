@@ -51,8 +51,29 @@ function RootPage() {
           </div>
           <img src="./image/download_now.png" alt="" />
           <div className="flex">
-            <img src="./image/chplay.png" alt="" className="cursor-pointer" />
-            <img src="./image/appstore.png" alt="" className="cursor-pointer" />
+            <img
+              src="./image/chplay.png"
+              alt=""
+              className="cursor-pointer"
+              onClick={() =>
+                window.open(
+                  'https://play.google.com/store/apps/details?id=com.circlebox.boomarena',
+                  '_blank'
+                )
+              }
+            />
+
+            <img
+              src="./image/appstore.png"
+              alt=""
+              className="cursor-pointer"
+              onClick={() =>
+                window.open(
+                  'https://apps.apple.com/us/app/boom-arena/id6446782218',
+                  '_blank'
+                )
+              }
+            />
           </div>
         </LayoutCommon>
       </div>
