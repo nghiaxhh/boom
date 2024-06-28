@@ -30,27 +30,27 @@ root.render(
         },
       }}
     >
-      <MetaMaskProvider
-        debug={false}
-        sdkOptions={{
-          logging: {
-            developerMode: false,
-          },
-          checkInstallationImmediately: false, // This will automatically connect to MetaMask on page load
-          dappMetadata: {
-            name: 'Boom Arena',
-            url: window.location.host,
-          },
-          i18nOptions: {
-            enabled: true,
-          },
-          i18nInstance: 'jp',
-        }}
-      >
-        <StyleProvider layer>
+      <StyleProvider layer>
+        <MetaMaskProvider
+          debug={false}
+          sdkOptions={{
+            logging: {
+              developerMode: false,
+            },
+            checkInstallationImmediately: false, // This will automatically connect to MetaMask on page load
+            dappMetadata: {
+              name: 'Boom Arena',
+              url: window.location.host,
+            },
+            i18nOptions: {
+              enabled: true,
+            },
+            i18nInstance: 'jp',
+          }}
+        >
           <App />
-        </StyleProvider>
-      </MetaMaskProvider>
+        </MetaMaskProvider>
+      </StyleProvider>
     </ConfigProvider>
   </Provider>
   // </React.StrictMode>,
