@@ -7,6 +7,7 @@ import AuthServices from '../../services/AuthServices'
 import ChangePassword from './components/ChangePassword'
 import Profile from './components/Profile'
 import { UserInfoWrapper } from './styled'
+import NFTPassport from './components/NFTPassport'
 
 function UserInfo() {
   const navigate = useNavigate()
@@ -51,6 +52,14 @@ function UserInfo() {
                 </div>
                 <Divider />
                 <div
+                  className={`flex h-12 cursor-pointer pl-5 ${tabActive === 3 && 'text-[#FF9C09]'}`}
+                  onClick={() => setTabActive(3)}
+                >
+                  NFT Passport
+                </div>
+
+                <Divider />
+                <div
                   className={`flex h-12 cursor-pointer pl-5 ${tabActive === 2 && 'text-[#FF9C09]'}`}
                   onClick={() => setTabActive(2)}
                 >
@@ -68,7 +77,9 @@ function UserInfo() {
               </div>
             </Col>
             <Col span={18}>
-              {tabActive === 1 ? <Profile /> : <ChangePassword />}
+              {tabActive === 1 && <Profile />}
+              {tabActive === 2 && <ChangePassword />}
+              {tabActive === 3 && <NFTPassport />}
             </Col>
           </Row>
         </LayoutCommon>
