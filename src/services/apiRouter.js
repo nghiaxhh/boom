@@ -11,6 +11,7 @@ export const apiGetMe = '/api/v1/users/me'
 export const apiUpdateUser = '/api/v1/users/'
 export const apiChangePass = '/api/v1/users/change-password'
 export const apiGetRewards = '/api/v1/users/my-rewards'
+export const apiPassport = '/api/v1/users/passport'
 
 // Files
 export const apiUploadFile = '/api/v1/files/upload'
