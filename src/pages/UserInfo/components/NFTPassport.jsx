@@ -1,23 +1,18 @@
 import { Divider, Spin } from 'antd'
-import axios from 'axios'
 import React, { useEffect, useState } from 'react'
-import { useSelector } from 'react-redux'
+import UserServices from 'services/UserServices'
 
 const NFTPassport = () => {
   const [loading, setLoading] = useState(false)
   const [imgSrc, setImgSrc] = useState('')
   const [info, setInfo] = useState()
 
-  const { user } = useSelector((state) => state.common)
-
   const getPassport = () => {
     setLoading(true)
-    axios
-      .get(
-        `${process.env.REACT_APP_BLOCKCHAIN + '/api/nft-passport/balance/' + user?.web3_wallet_address}`
-      )
+    UserServices.getPassport()
       .then((res) => {
-        if (res?.status === 200) {
+        console.log(res)
+        if (res?.isOk) {
           const data = res.data.balance[0]
           setInfo(data)
           setImgSrc(data?.img ? data.img : '/image/passport.png')
