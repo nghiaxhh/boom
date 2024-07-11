@@ -138,7 +138,9 @@ function Profile() {
             <img src={linkImg} alt="" className="h-[200px] w-full" />
 
             <label className="absolute left-0 top-0  flex h-[200px] w-full cursor-pointer items-center justify-center">
-              <div className="hidden text-white group-hover:block">
+              <div
+                className={`hidden text-white ${!disabled && 'group-hover:block'}`}
+              >
                 <IconSvg name="icon-image" />
                 Upload
               </div>
