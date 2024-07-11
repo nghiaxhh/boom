@@ -15,7 +15,7 @@ const NFTPassport = () => {
         if (res?.isOk) {
           const data = res.data.balance[0]
           setInfo(data)
-          setImgSrc(data?.img ? data.img : '/image/passport.png')
+          setImgSrc('/image/passport.png')
         }
       })
       .catch(() => {})
