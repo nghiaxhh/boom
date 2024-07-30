@@ -37,7 +37,7 @@ function Breakdown({ onLoading }) {
             <td>
               <div className="p-2">
                 <div className="text-lg font-semibold">Win a match </div>
-                <div className="text-[12px]">Earn 10 points per match </div>
+                <div className="text-[12px]">Earn 1000 points per match </div>
               </div>
             </td>
             <td className="text-center align-middle">
@@ -58,7 +58,7 @@ function Breakdown({ onLoading }) {
               <div className="p-2">
                 <div className="text-lg font-semibold">Play 10 matches</div>
                 <div className="text-[12px]">
-                  Earn 10 points by playing 10 matches. Once per day
+                  Earn 10.000 points by playing 10 matches. Once per day
                 </div>
               </div>
             </td>
@@ -79,7 +79,7 @@ function Breakdown({ onLoading }) {
             <td>
               <div className="p-2">
                 <div className="text-lg font-semibold">Play 20 matches</div>
-                <div className="text-[12px]">Earn 20 points per match </div>
+                <div className="text-[12px]">Earn 40.000 points by playing 20 matches. Once per day </div>
               </div>
             </td>
             <td className="text-center align-middle">

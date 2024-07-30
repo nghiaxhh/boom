@@ -198,7 +198,7 @@ function ModalClaimReward({ isOpen, onOk, onCancel }) {
           </div>
           <div className="flex items-center">
             <Button className="claim-point" disabled>
-              1.000.000
+              20.000
             </Button>
           </div>
         </div>
@@ -207,7 +207,7 @@ function ModalClaimReward({ isOpen, onOk, onCancel }) {
             <div className="mb-3 text-lg font-semibold">Win a match</div>
 
             <div className="mb-2 text-xs text-[#FF9C09]">
-              Earn 10 points per match
+              Earn 1000 points per match
             </div>
           </div>
           <div className="flex items-center">
@@ -230,7 +230,7 @@ function ModalClaimReward({ isOpen, onOk, onCancel }) {
             <div className="mb-3 text-lg font-semibold">Play 10 matches</div>
 
             <div className="mb-2 text-xs text-[#FF9C09]">
-              Earn 10 points by playing 10 matches. Once per day
+              Earn 10.000 points by playing 10 matches. Once per day
             </div>
           </div>
           <div className="flex items-center">
@@ -253,7 +253,7 @@ function ModalClaimReward({ isOpen, onOk, onCancel }) {
             <div className="mb-3 text-lg font-semibold">Play 20 matches</div>
 
             <div className="mb-2 text-xs text-[#FF9C09]">
-              Earn 30 points by playing 20 matches. Once per day
+              Earn 40.000 points by playing 20 matches. Once per day
             </div>
           </div>
           <div className="flex items-center">
