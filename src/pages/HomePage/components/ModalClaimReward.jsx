@@ -28,10 +28,9 @@ function ModalClaimReward({ isOpen, onOk, onCancel }) {
       .then((res) => {
         if (res.isOk) {
           setListMission(res.data)
-          setIsValidDailyClaim(res.data?.daily_allowed)
 
           if (res.data.daily_allowed) {
-            setIsValidDailyClaim(true)
+            setIsValidDailyClaim(res.data.daily_allowed)
           } else {
             startCountdown(res.data.daily_collected_at)
           }
@@ -43,8 +42,8 @@ function ModalClaimReward({ isOpen, onOk, onCancel }) {
 
   const getCountdown = (timeUp) => {
     const now = dayjs().unix()
-    const timeRemaining = dayjs(timeUp).add(13, 'hour').unix() - now
-
+    // change timeUp to UTC+7 (+7) and add 24 hours (+24) => 31
+    const timeRemaining = dayjs(timeUp).add(31, 'hour').unix() - now
     const hours = Math.floor((timeRemaining % (60 * 60 * 24)) / (60 * 60))
     const minutes = Math.floor((timeRemaining % (60 * 60)) / 60)
     const seconds = Math.floor(timeRemaining % 60)
@@ -198,7 +197,7 @@ function ModalClaimReward({ isOpen, onOk, onCancel }) {
           </div>
           <div className="flex items-center">
             <Button className="claim-point" disabled>
-              20.000
+              {listMission?.referred_points}
             </Button>
           </div>
         </div>

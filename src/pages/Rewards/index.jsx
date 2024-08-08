@@ -62,8 +62,8 @@ function Rewards() {
 
   const getCountdown = (timeUp) => {
     const now = dayjs().unix()
-    const timeRemaining = dayjs(timeUp).add(13, 'hour').unix() - now
-
+    // change timeUp to UTC+7 (+7) and add 24 hours (+24) => +31
+    const timeRemaining = dayjs(timeUp).add(31, 'hour').unix() - now
     const hours = Math.floor((timeRemaining % (60 * 60 * 24)) / (60 * 60))
     const minutes = Math.floor((timeRemaining % (60 * 60)) / 60)
     const seconds = Math.floor(timeRemaining % 60)
