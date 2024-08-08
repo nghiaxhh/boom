@@ -141,7 +141,7 @@ function ModalClaimReward({ isOpen, onOk, onCancel }) {
                 handleClaimRewards('DAILY', listMission?.daily_points)
               }
             >
-              1000
+              {listMission?.daily_points}
             </Button>
           </div>
         </div>
