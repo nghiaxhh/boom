@@ -1,12 +1,12 @@
+import React from 'react'
 import { Checkbox, Col, Form, Input, Row, Spin } from 'antd'
-import React, { useState } from 'react'
+import { useEffect, useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 import Button from '../../../components/Button'
-import { TOKEN_KEY } from '../../../helper/constants'
-import { ROUTE_PATH } from '../../../routes/route.constant'
-import AuthServices from '../../../services/AuthServices'
-import { LoginFormWrapper } from './styled'
 import { isValidEmail } from '../../../helper/utils'
+import { ROUTE_PATH } from '../../../routes/route.constant'
+import { LoginFormWrapper } from './styled'
+import { TOKEN_KEY } from 'helper/constants'
 
 const LoginForm = () => {
   const [form] = Form.useForm()
@@ -18,19 +18,25 @@ const LoginForm = () => {
       .validateFields()
       .then((val) => {
         setLoading(true)
-        const body = {
-          username: val.email,
-          password: val.password,
-        }
-        AuthServices.logIn(body)
-          .then((respon) => {
-            if (respon.isOk) {
-              localStorage.setItem(TOKEN_KEY, JSON.stringify(respon))
-              navigate(ROUTE_PATH.HOME)
-            }
-          })
+        const changeLoading = setTimeout(() => {
+          setLoading(false)
+          navigate(ROUTE_PATH.HOME)
+          localStorage.setItem(TOKEN_KEY, 'JSON.stringify(respon)')
+          console.log(val)
+        }, 3000)
 
-          .finally(() => setLoading(false))
+        // const body = {
+        //   username: val.email,
+        //   password: val.password,
+        // }
+        // AuthServices.logIn(body)
+        //   .then((respon) => {
+        //     if (respon.isOk) {
+        //       localStorage.setItem(TOKEN_KEY, JSON.stringify(respon))
+        //       navigate(ROUTE_PATH.HOME)
+        //     }
+        //   })
+        //   .finally(() => setLoading(false))
       })
       .catch(() => {})
   }

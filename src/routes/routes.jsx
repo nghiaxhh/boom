@@ -1,5 +1,5 @@
 import React, { Suspense } from 'react'
-import { createBrowserRouter } from 'react-router-dom'
+import { createBrowserRouter, Navigate } from 'react-router-dom'
 import { ROUTE_PATH } from './route.constant'
 import AppLayout from '../layouts/AppLayout'
 import AuthLayout from '../layouts/AuthLayout'
@@ -25,6 +25,10 @@ export const router = createBrowserRouter([
     element: <AppLayout />,
     errorElement: <PageNotFound />,
     children: [
+      // {
+      //   index: true,
+      //   element: <Navigate to={ROUTE_PATH.LOGIN} replace />, // Default redirect to /login
+      // },
       {
         element: <AuthLayout />,
         children: [
