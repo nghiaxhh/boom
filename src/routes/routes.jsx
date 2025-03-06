@@ -25,21 +25,21 @@ export const router = createBrowserRouter([
     element: <AppLayout />,
     errorElement: <PageNotFound />,
     children: [
-      // {
-      //   index: true,
-      //   element: <Navigate to={ROUTE_PATH.LOGIN} replace />, // Default redirect to /login
-      // },
+      {
+        index: true,
+        element: <Navigate to={ROUTE_PATH.LOGIN} replace />, // Default redirect to /login
+      },
       {
         element: <AuthLayout />,
         children: [
-          {
-            path: '/',
-            element: (
-              <Suspense fallback={null}>
-                <RootPage />
-              </Suspense>
-            ),
-          },
+          // {
+          //   path: '/',
+          //   element: (
+          //     <Suspense fallback={null}>
+          //       <RootPage />
+          //     </Suspense>
+          //   ),
+          // },
           {
             path: ROUTE_PATH.LOGIN,
             element: (
