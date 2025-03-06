@@ -19,7 +19,7 @@ jobs:
         with:
           node-version: 22
           cache: 'npm'
-          cache-dependency-path: ./package-lock.json
+          cache-dependency-path: '**/package-lock.json'
       
       - name: Create .env file
         run: echo "${{ secrets.ENV_PRODUCTION }}" > .env
