@@ -18,13 +18,12 @@ jobs:
         uses: actions/setup-node@v4
         with:
           node-version: 22
-          cache: 'npm'
-          cache-dependency-path: './package-lock.json' 
+          cache: 'npm' 
       
       - name: Create .env file
         run: echo "${{ secrets.ENV_PRODUCTION }}" > .env
       - run: npm i --force
-      - run: npm ci
+ 
       - run: npm run build
   deploy:
     runs-on: ubuntu-latest
@@ -44,6 +43,6 @@ jobs:
             git reset --hard origin/main
             echo "${{secrets.ENV_PRODUCTION}}" > .env
             npm i --force
-            npm ci
+      
             npm run build
             pm2 restart BoomArena
