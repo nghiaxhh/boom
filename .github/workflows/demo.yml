@@ -11,7 +11,7 @@ jobs:
     runs-on: ubuntu-latest
     defaults:
       run:
-        working-directory: ./boom
+        working-directory: 'boom'
     strategy:
       matrix:
         node-version: [18.x, 20.x, 22.x]
@@ -22,7 +22,7 @@ jobs:
         with:
           node-version: 22
           cache: 'npm'
-          cache-dependency-path: '**/package-lock.json'
+          cache-dependency-path: '**/package-lock.json' 
       
       - name: Create .env file
         run: echo "${{ secrets.ENV_PRODUCTION }}" > .env
