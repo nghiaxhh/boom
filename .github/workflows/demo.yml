@@ -11,7 +11,7 @@ jobs:
     runs-on: ubuntu-latest
     strategy:
       matrix:
-        node-version: [18.x, 20.x, 22.x]
+        node-version: [18.x, 20.x]
     steps:
       - uses: actions/checkout@v4
       - name: Use Node.js ${{ matrix.node-version }}
@@ -19,9 +19,7 @@ jobs:
         with:
           node-version: 22.14.0
           cache: 'npm'
-          cache-dependency-path: |
-            **/package-lock.json
-            **/node_modules
+          cache-dependency-path: subdir/package-lock.json
       
       - name: Create .env file
         run: echo "${{ secrets.ENV_PRODUCTION }}" > .env
