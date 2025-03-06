@@ -8,13 +8,10 @@ on:
 
 jobs:
   build:
-    runs-on: ubuntu-latest
-    defaults:
-      run:
-        working-directory: 'boom'
+    runs-on: ubuntu-latest 
     strategy:
       matrix:
-        node-version: [18.x, 20.x, 22.x]
+        node-version: [22.x]
     steps:
       - uses: actions/checkout@v4
       - name: Use Node.js ${{ matrix.node-version }}
@@ -22,7 +19,7 @@ jobs:
         with:
           node-version: 22
           cache: 'npm'
-          cache-dependency-path: '**/package-lock.json' 
+          cache-dependency-path: './package-lock.json' 
       
       - name: Create .env file
         run: echo "${{ secrets.ENV_PRODUCTION }}" > .env
